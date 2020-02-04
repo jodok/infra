@@ -1,0 +1,16 @@
+#! /bin/sh -e
+
+export DPBX_ACCESS_TOKEN="{{ pillar['secrets']['vault']['duplicity']['dpbx_access_token'] }}"
+export PASSPHRASE="{{ pillar['secrets']['vault']['duplicity']['passphrase'] }}"
+
+duplicity --full-if-older-than 1M \
+          /home \
+          dpbx:///{{ grains.id }}/home
+
+duplicity remove-older-than 12M \
+          --force \
+          dpbx:///{{ grains.id }}/home
+
+duplicity remove-all-inc-of-but-n-full 3 \
+          --force \
+          dpbx:///{{ grains.id }}/home

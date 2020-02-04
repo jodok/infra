@@ -1,0 +1,13 @@
+[Unit]
+Description=Backup every day
+
+[Timer]
+# see systemd.time(7) manual page for other scheduling options
+OnCalendar=*-*-* 4:00:00
+# run immediately if we missed a backup for some reason
+Persistent=true
+OnBootSec=15min
+#OnUnitActiveSec=1w
+
+[Install]
+WantedBy=timers.target
