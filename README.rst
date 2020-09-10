@@ -30,6 +30,8 @@ In case this doesn't show the desired hostname (FQDN), correct it with::
 
   sudo hostnamectl set-hostname your-new-hostname.your-domain
 
+We also assume that SELINUX is disabled.
+
 Local installation of Salt
 ==========================
 

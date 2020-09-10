@@ -1,9 +1,3 @@
-cockpit.socket:
-  service.enabled: []
-
-disabled:
-  selinux.mode: []
-
 # Automatic security updates via Steve Meier's Updateinfo yum repository
 # https://updateinfo.cefs.steve-meier.de/
 # Sign up with patreon to get security infos: https://www.patreon.com/stevemeier
