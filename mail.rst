@@ -1,0 +1,3 @@
+dns
+spf
+reverse lookup

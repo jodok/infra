@@ -1,0 +1,9 @@
+# Exim filter
+if
+  $h_X-Spam-Status: begins "Yes"
+  or
+  "${if def:h_X-Spam-Flag {def}{undef}}" is "def"
+then
+    save $home/Maildir/.Junk
+    finish
+endif
