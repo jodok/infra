@@ -13,9 +13,9 @@ fully qualified domainname of your host::
 
   hostname -f
 
-In case this doesn't show the desired hostname, correct it with::
+In case this doesn't show the desired hostname (FQDN), correct it with::
 
-  sudo hostnamectl set-hostname your-new-hostname
+  sudo hostnamectl set-hostname your-new-hostname.your-domain
 
 Local installation of Salt
 ==========================
