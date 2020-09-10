@@ -5,5 +5,5 @@ base:
   - hosts.bartok
   'bela.a1.nr.gy':
   - hosts.bela
-  'bertone.hetzner.nr.gy':
+  'bertone.batlogg.com':
   - hosts.bertone

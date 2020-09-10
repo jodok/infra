@@ -1,3 +1,3 @@
 letsencrypt:
   certs:
-    bertone.hetzner.nr.gy:
+    bertone.batlogg.com: []
