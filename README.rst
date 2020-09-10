@@ -8,6 +8,19 @@ provide me feedback.
 This README assumes there's a user `admin` that we use to bootstrap the system
 and we're going to use him for administrative tasks.
 
+You can create an admin user with the following command (as root)::
+
+  useradd -m -G wheel admin
+
+I prefer to be able to run ``sudo`` as admin user without entering a password
+therefor I set ``/etc/sudoers`` like this::
+
+  ## Allows people in group wheel to run all commands
+  # %wheel  ALL=(ALL) ALL
+
+  ## Same thing without a password
+  %wheel  ALL=(ALL) NOPASSWD: ALL
+
 Make sure your hostname is set correctly. The following command should show the
 fully qualified domainname of your host::
 
