@@ -30,7 +30,8 @@ In case this doesn't show the desired hostname (FQDN), correct it with::
 
   sudo hostnamectl set-hostname your-new-hostname.your-domain
 
-We also assume that SELINUX is disabled.
+We also assume that SELINUX is disabled. Disabling SELINUX requires a system
+restart.
 
 Local installation of Salt
 ==========================
@@ -100,17 +101,3 @@ The first salt run
 Here we go! We're ready to apply the state to the local node::
 
   sudo salt-call --local state.apply terse=true
-
-After the first run of salt you might need to restart the system as disabling
-SELINUX requires a system restart.
-
-Network docs
-============
-
-Documentation of IP addresses
-
-=================== =========================== ===================================
-IP                  Host                        Description
-=================== =========================== ===================================
-``10.66.108.117``   next.a1.nr.gy               Nextcloud Server
-=================== =========================== ===================================
