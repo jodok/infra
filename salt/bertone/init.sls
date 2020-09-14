@@ -1,7 +1,7 @@
 include:
-- letsencrypt
 - nginx
-- nginx.letsencrypt
+- letsencrypt
+- letsencrypt.nginx
 
 /etc/nginx/conf.d/bertone.batlogg.com.conf:
   file.managed:

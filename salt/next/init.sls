@@ -1,2 +1,3 @@
 include:
 - letsencrypt
+- letsencrypt.standalone
