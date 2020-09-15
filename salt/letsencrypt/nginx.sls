@@ -14,7 +14,7 @@
 
 nginx-reload-letsencrypt:
   cmd.run:
-  - name: /usr/sbin/nginx -t -c /etc/nginx/nginx.conf && systemctl reload nginx
+  - name: systemctl try-restart nginx
   - onchanges:
     - file: /etc/nginx/conf.d/ssl.conf.inc
     - file: /etc/nginx/conf.d/letsencrypt.conf.inc
