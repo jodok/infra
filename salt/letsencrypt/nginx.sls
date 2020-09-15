@@ -8,7 +8,7 @@
   file.managed:
   - source: salt://letsencrypt/letsencrypt.conf.inc
 
-/etc/nginx/snippets/ssl.conf.inc:
+/etc/nginx/conf.d/ssl.conf.inc:
   file.managed:
   - source: salt://letsencrypt/ssl.conf.inc
 
