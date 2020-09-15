@@ -17,7 +17,7 @@ letsencrypt:
   - user: root
   - group: letsencrypt
 
-{%- if salt['pillar['letsencrypt']['mode'] == 'standalone' %}
+{%- if pillar['letsencrypt']['mode'] == 'standalone' %}
   {%- set letsencrypt_mode = '--standalone' %}
 {%- else %}
   {%- set letsencrypt_mode = '--webroot -w /var/lib/letsencrypt/' %}
