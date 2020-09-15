@@ -12,8 +12,8 @@
 
 /etc/nginx/snippets/letsencrypt.conf:
   file.managed:
-  - source: salt://nginx/letsencrypt.conf
+  - source: salt://letsencrypt/letsencrypt.conf
 
 /etc/nginx/snippets/ssl.conf:
   file.managed:
-  - source: salt://nginx/ssl.conf
+  - source: salt://letsencrypt/ssl.conf
