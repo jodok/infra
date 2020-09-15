@@ -45,7 +45,7 @@ letsencrypt:
 /etc/sysconfig/certbot:
   file.managed:
   - source: salt://letsencrypt/certbot.sysconfig.j2
-  - template: jina
+  - template: jinja
 
 certbot-renew.timer:
   service.enabled: []
