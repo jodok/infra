@@ -4,16 +4,17 @@
   - name: /usr/bin/openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
   - unless: test -r /etc/ssl/certs/dhparam.pem
 
-/etc/nginx/snippets:
-  file.directory:
-  - mode: "0755"
-  - user: root
-  - group: root
-
-/etc/nginx/snippets/letsencrypt.conf:
+/etc/nginx/conf.d/letsencrypt.conf.inc:
   file.managed:
-  - source: salt://letsencrypt/letsencrypt.conf
+  - source: salt://letsencrypt/letsencrypt.conf.inc
 
-/etc/nginx/snippets/ssl.conf:
+/etc/nginx/snippets/ssl.conf.inc:
   file.managed:
-  - source: salt://letsencrypt/ssl.conf
+  - source: salt://letsencrypt/ssl.conf.inc
+
+nginx-reload-letsencrypt:
+  cmd.run:
+  - name: /usr/sbin/nginx -t -c /etc/nginx/nginx.conf && systemctl reload nginx
+  - onchanges:
+    - file: /etc/nginx/conf.d/ssl.conf.inc
+    - file: /etc/nginx/conf.d/letsencrypt.conf.inc

@@ -4,9 +4,9 @@
 # you need to add the credentials to salt-pillar
 updates-cefs:
   pkgrepo.managed:
-    - humanname: CentOS-$releasever - Updates (from CEFS)
-    - baseurl: https://{{ pillar['secrets']['vault']['cefs'] }}@updateinfo.cefs.steve-meier.de/$releasever/updates/$basearch/
-    - gpgcheck: 1
+  - humanname: CentOS-$releasever - Updates (from CEFS)
+  - baseurl: https://{{ pillar['secrets']['vault']['cefs'] }}@updateinfo.cefs.steve-meier.de/$releasever/updates/$basearch/
+  - gpgcheck: 1
 dnf-automatic:
   pkg.installed: []
   file.managed:
