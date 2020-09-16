@@ -18,3 +18,13 @@ php:
 
 php-fpm:
   service.enabled: []
+
+/etc/php-fpm.d/www.conf:
+  file.managed:
+  - source: salt://php/php-fpm.conf
+
+php-fpm-reload:
+  cmd.run:
+  - name: systemctl try-restart php-fpm
+  - onchanges:
+    - file: /etc/php-fpm.d/www.conf

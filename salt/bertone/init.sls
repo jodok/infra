@@ -1,6 +1,7 @@
 include:
 - nginx
 - letsencrypt
+- letsencrypt.nginx
 - php
 
 /etc/nginx/conf.d/bertone.batlogg.com.conf:
