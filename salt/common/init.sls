@@ -13,11 +13,12 @@ dnf-automatic:
   - name: /etc/dnf/automatic.conf
   - source: salt://common/automatic.conf
 
-git:
-  pkg.installed: []
-
-wget:
-  pkg.installed: []
+commom_pkgs:
+  pkg.installed:
+  - pkgs:
+    - tar
+    - git
+    - wget
 
 admin:
   user.present:
