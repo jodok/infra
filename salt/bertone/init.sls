@@ -10,6 +10,6 @@ include:
 
 nginx-reload:
   cmd.run:
-  - name: /usr/sbin/nginx -t -c /etc/nginx/nginx.conf && systemctl reload nginx
+  - name: systemctl try-restart nginx.service
   - onchanges:
     - file: /etc/nginx/conf.d/bertone.batlogg.com.conf
