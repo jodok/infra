@@ -15,6 +15,8 @@ php:
     - php-fpm
     - php-gd
     - php-mysqlnd
+    - php-pecl-zip
+    - php-pecl-imagick
 
 php-fpm:
   service.enabled: []
