@@ -17,10 +17,16 @@ letsencrypt:
   - user: root
   - group: letsencrypt
 
+{%- if pillar['letsencrypt']['mode'] == 'standalone' %}
+  {%- set letsencrypt_mode = '--standalone' %}
+{%- else %}
+  {%- set letsencrypt_mode = '--webroot -w /var/lib/letsencrypt/' %}
+{%- endif %}
+
 {%- for cert, domains in salt['pillar.get']('letsencrypt:certs', {}).items() %}
 /etc/letsencrypt/live/{{ cert }}/fullchain.pem:
   cmd.run:
-  - name: /bin/certbot certonly -n --agree-tos --expand -m sysadmin@crate.io --standalone -d {{ cert }}{%- for domain in domains %} -d {{ domain }}{%- endfor %}
+  - name: /bin/certbot certonly -n --agree-tos --expand -m jodok@batlogg.com {{ letsencrypt_mode }} -d {{ cert }}{%- for domain in domains %} -d {{ domain }}{%- endfor %}
   - unless: test -e /etc/letsencrypt/live/{{ cert }}/fullchain.pem
 
 /etc/letsencrypt/archive/{{ cert }}:
@@ -36,9 +42,10 @@ letsencrypt:
   - group: letsencrypt
 {%- endfor %}
 
-certbot_cron:
-  cron.present:
-  - name: /bin/certbot renew -q {%- for post_hook in salt['pillar.get']('letsencrypt:post_hooks', []) %} --post-hook '{{ post_hook }}'{%- endfor %}
-  - user: root
-  - hour: 0,12
-  - minute: 0
+/etc/sysconfig/certbot:
+  file.managed:
+  - source: salt://letsencrypt/certbot.sysconfig.j2
+  - template: jinja
+
+certbot-renew.timer:
+  service.enabled: []

@@ -1,6 +1,7 @@
 letsencrypt:
+  mode: standalone
   certs:
     bela.batlogg.com:
     - mx2.batlogg.com
-  post_hooks:
+  deploy_hooks:
   - /bin/systemctl try-restart exim.service

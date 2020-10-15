@@ -7,3 +7,5 @@ base:
   - bela
   'next.a1.nr.gy':
   - next
+  'bertone.batlogg.com':
+  - bertone
