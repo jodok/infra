@@ -33,6 +33,14 @@ In case this doesn't show the desired hostname (FQDN), correct it with::
 We also assume that SELINUX is disabled. Disabling SELINUX requires a system
 restart.
 
+Going forward CentOS Stream is the preferred distribution. In case the base
+image was based on CentOS 8, move to Stream::
+
+  dnf install centos-release-stream
+  dnf swap centos-{linux,stream}-repos
+  dnf distro-sync
+
+
 Local installation of Salt
 ==========================
 

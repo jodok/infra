@@ -19,6 +19,7 @@ commom_pkgs:
     - tar
     - git
     - wget
+    - telnet
 
 admin:
   user.present:
