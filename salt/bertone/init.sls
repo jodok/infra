@@ -5,8 +5,8 @@ include:
 - php
 
 exim:
-- pkg.installed: []
-- service.enabled: []
+  pkg.installed: []
+  service.enabled: []
 
 /etc/nginx/conf.d/bertone.batlogg.com.conf:
   file.managed:
