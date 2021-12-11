@@ -23,14 +23,14 @@ nginx-reload:
     - file: /etc/nginx/conf.d/bertone.batlogg.com.conf
     - file: /etc/nginx/conf.d/nr.gy.conf
 
-dnf module enable nodejs:14
-dnf install nodejs
-or
-dnf module -y install nodejs:14/common
+#dnf module enable nodejs:14
+#dnf install nodejs
+#or
+#dnf module -y install nodejs:14/common
 
-useradd -r -m -U -d /opt/strapi strapi
-mkdir ~/.npm-global
-vi ~/.profile
-export PATH=~/.npm-global/bin:$PATH
+#useradd -r -m -U -d /opt/strapi strapi
+#mkdir ~/.npm-global
+#vi ~/.profile
+#export PATH=~/.npm-global/bin:$PATH
 
-npm install pg
+#npm install pg
