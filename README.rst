@@ -122,6 +122,13 @@ Let's remove the password::
 
   gpg> passwd
 
+In case you can't enter an empty password you might need to configure pinentry::
+
+  sudo apt install pinentry-tty
+  sudo update-alternatives --config pinentry
+
+and set it to `pinentry-tty`
+
 The first salt run
 ------------------
 
