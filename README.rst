@@ -8,7 +8,9 @@ provide me feedback.
 This README assumes there's a user `admin` that we use to bootstrap the system
 and we're going to use him for administrative tasks.
 
-You can create an admin user with the following command (as root)::
+You can create an admin user with the following command (as root).
+On Ubuntu based systems you might want to use the group `admin` instead of
+`wheel` (`-g` if group already exists)::
 
   useradd -m -G wheel admin
 
@@ -41,8 +43,8 @@ image was based on CentOS 8, move to Stream::
   dnf distro-sync
 
 
-Local installation of Salt
-==========================
+Local installation of Salt (CentOS)
+===================================
 
 First install salt-minion (and the required repositories)::
 
@@ -50,6 +52,23 @@ First install salt-minion (and the required repositories)::
   sudo dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
   sudo dnf -y install https://repo.saltstack.com/py3/redhat/salt-py3-repo-latest.el8.noarch.rpm
   sudo dnf -y install salt-minion git
+
+Local installation of Salt (Ubuntu)
+===================================
+
+Install salt-minion (and the required repositories)::
+
+  # Download key
+  sudo curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest/salt-archive-keyring.gpg
+  # Create apt sources list file
+  echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest focal main" | sudo tee /etc/apt/sources.list.d/salt.list
+
+  apt-get update
+  apt-get install salt-minion
+
+
+Local installation of Salt (OS independent)
+===========================================
 
 Clone this repository to a working folder of the ``admin`` user::
 

@@ -1,9 +1,11 @@
 base:
   '*':
   - secrets
-  'bartok.a1.nr.gy':
+  'bartok.batlogg.com':
   - hosts.bartok
   'bela.a1.nr.gy':
   - hosts.bela
   'bertone.batlogg.com':
   - hosts.bertone
+  'janos.a1.nr.gy':
+  - hosts.janos

@@ -4,7 +4,7 @@ include:
 
 /etc/exim/exim.conf:
   file.managed:
-  - source: salt://bartok/exim/exim.conf
+  - source: salt://janos/exim/exim.conf
   - mode: "0644"
 
 /etc/exim/private:

@@ -1,11 +1,9 @@
 base:
   '*':
   - common
-  'bartok.a1.nr.gy':
+  'bartok.batlogg.com':
   - bartok
-  'bela.a1.nr.gy':
-  - bela
-  'next.a1.nr.gy':
-  - next
   'bertone.batlogg.com':
   - bertone
+  'janos.batlogg.com':
+  - janos
