@@ -1,0 +1,17 @@
+https://linuxize.com/post/secure-nginx-with-let-s-encrypt-on-centos-7/
+
+https://linuxize.com/post/how-to-install-wordpress-with-nginx-on-centos-7/
+
+
+25 : 465 : 587
+
+
+CREATE DATABASE wordpress CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE USER 'wordpress'  IDENTIFIED BY 'YPimQRcCr9QP,xpZ';
+GRANT ALL ON wordpress.* TO 'wordpress'@'localhost';
+GRANT ALL ON wordpress.* TO 'wordpress'@'%';
+FLUSH PRIVILEGES;
+EXIT;
+
+
+CREATE USER 'nrgy'  IDENTIFIED BY 'ukibBw.cX7BmxECh';
