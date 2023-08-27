@@ -3,6 +3,7 @@ include:
 - letsencrypt
 - letsencrypt.nginx
 - php
+- docker
 
 exim:
   pkg.installed: []
@@ -16,12 +17,17 @@ exim:
   file.managed:
   - source: salt://bertone/nr.gy.conf
 
+/etc/nginx/conf.d/happyswing.at.conf:
+  file.managed:
+  - source: salt://bertone/happyswing.at.conf
+
 nginx-reload:
   cmd.run:
   - name: systemctl try-restart nginx.service
   - onchanges:
     - file: /etc/nginx/conf.d/bertone.batlogg.com.conf
     - file: /etc/nginx/conf.d/nr.gy.conf
+    - file: /etc/nginx/conf.d/happyswing.at.conf
 
 #dnf module enable nodejs:14
 #dnf install nodejs
