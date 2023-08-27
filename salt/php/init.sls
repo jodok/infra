@@ -1,13 +1,13 @@
 {%- if grains['os'] == 'CentOS' %}
 
-remi-release-8:
+remi-release-9:
   pkg.installed:
   - sources:
-    - remi-release: http://rpms.remirepo.net/enterprise/remi-release-8.rpm
+    - remi-release: https://rpms.remirepo.net/enterprise/remi-release-9.rpm
 remi-7.4:
   cmd.run:
-  - name: module reset php && dnf module enable php:remi-7.4
-  - unless: dnf module list --enabled php | grep "remi-7\.4"
+  - name: module reset php && dnf module enable php:remi-8.2
+  - unless: dnf module list --enabled php | grep "remi-8\.2"
 
 {%- elif grains['os'] == 'Ubuntu' %}
 
@@ -26,6 +26,7 @@ php:
     - php
     - php-fpm
     - php-gd
+    - php-intl
     {%- if grains['os'] == 'CentOS' %}
     - php-mysqlnd
     - php-pecl-zip
@@ -36,10 +37,11 @@ php:
     - php-imagick
     {%- endif %}
 
-php-fpm:
-  service.enabled: []
 
 {%- if grains['os'] == 'CentOS' %}
+
+php-fpm:
+  service.enabled: []
 
 /etc/php-fpm.d/www.conf:
   file.managed:
@@ -51,5 +53,8 @@ php-fpm-reload:
     - file: /etc/php-fpm.d/www.conf
 
 {%- elif grains['os'] == 'Ubuntu' %}
+
+php8.0-fpm:
+  service.enabled: []
 
 {%- endif %}
