@@ -4,9 +4,13 @@
   - name: /usr/bin/openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
   - unless: test -r /etc/ssl/certs/dhparam.pem
 
-/etc/nginx/conf.d/letsencrypt.conf.inc:
+/etc/nginx/default.d/letsencrypt.conf:
   file.managed:
-  - source: salt://letsencrypt/letsencrypt.conf.inc
+  - source: salt://letsencrypt/letsencrypt.conf
+
+/etc/nginx/default.d/redirect-https.conf:
+  file.managed:
+  - source: salt://letsencrypt/redirect-https.conf
 
 /etc/nginx/conf.d/ssl.conf.inc:
   file.managed:
@@ -17,4 +21,5 @@ nginx-reload-letsencrypt:
   - name: systemctl try-restart nginx
   - onchanges:
     - file: /etc/nginx/conf.d/ssl.conf.inc
-    - file: /etc/nginx/conf.d/letsencrypt.conf.inc
+    - file: /etc/nginx/conf.d/letsencrypt.conf
+    - file: /etc/nginx/conf.d/redirect-https.conf
