@@ -16,10 +16,15 @@
   file.managed:
   - source: salt://letsencrypt/ssl.conf.inc
 
+/etc/nginx/conf.d/letsencrypt.conf.inc:
+  file.managed:
+  - source: salt://letsencrypt/letsencrypt.conf
+
 nginx-reload-letsencrypt:
   cmd.run:
   - name: systemctl try-restart nginx
   - onchanges:
+    - file: /etc/nginx/default.d/letsencrypt.conf
+    - file: /etc/nginx/default.d/redirect-https.conf
     - file: /etc/nginx/conf.d/ssl.conf.inc
-    - file: /etc/nginx/conf.d/letsencrypt.conf
-    - file: /etc/nginx/conf.d/redirect-https.conf
+    - file: /etc/nginx/conf.d/letsencrypt.conf.inc
