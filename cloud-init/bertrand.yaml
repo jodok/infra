@@ -1,0 +1,45 @@
+#cloud-config
+
+# Hetzner normally sets the hostname, but we pin it here to avoid surprises.
+hostname: bertrand
+fqdn: bertrand.batlogg.com
+
+users:
+  - name: admin
+    gecos: Admin
+    groups: [sudo]
+    sudo: ["ALL=(ALL) NOPASSWD:ALL"]
+    shell: /bin/bash
+    ssh_authorized_keys:
+      - "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCklkTcGXm7RSadXDulh3dR0QLA0KymDzRhEhvvnyjRnzdEWmfgPfN05C9qDQZXzoL64NY8BuTVFMjLfWYC9+tesWMemJYCDV9ATwhFRZxru20+eBwFn9wLCLv7sozy72jIrWROvjoP5nG8D2/2Yzv07t/qPC7BDDOSp3gYJcyLLeIIqBfrZ6pmkM18V6rNDeRTz11EN5+mLRr6+AwHcBE8iv5+Ea1baMFTbvLx9NAPA3+IoPYSBiwfTCbFQKxkXMc7Fg31NG+iHrtj3dVsfGOq46ecla/FqdWudMlwScwV34MncZzNzVAxgN6TMUJtOIRl/OVox5oD2dFwVprjKHWH jodok@batlogg.com"
+
+package_update: true
+packages:
+  - curl
+  - git
+  - gpg
+
+write_files:
+  - path: /etc/salt/minion
+    permissions: "0644"
+    content: |
+      file_client: local
+      file_roots:
+        base:
+          - /home/admin/sandbox/infra/salt
+      pillar_roots:
+        base:
+          - /home/admin/sandbox/infra/pillar
+      decrypt_pillar:
+        - "secrets:vault"
+
+runcmd:
+  - [bash, -lc, "mkdir -p /etc/apt/keyrings"]
+  - [bash, -lc, "curl -fsSL https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public | tee /etc/apt/keyrings/salt-archive-keyring.pgp >/dev/null"]
+  - [bash, -lc, "curl -fsSL https://github.com/saltstack/salt-install-guide/releases/latest/download/salt.sources | tee /etc/apt/sources.list.d/salt.sources >/dev/null"]
+  - [bash, -lc, "apt update"]
+  - [bash, -lc, "apt install -y salt-minion"]
+  - [bash, -lc, "install -d -o admin -g admin /home/admin/sandbox"]
+  - [bash, -lc, "if [ ! -d /home/admin/sandbox/infra/.git ]; then su - admin -c 'git clone https://github.com/jodok/infra /home/admin/sandbox/infra'; fi"]
+  - [bash, -lc, "echo \"$(hostname -f)\" > /etc/salt/minion_id"]
+  - [bash, -lc, "salt-call --local state.apply terse=true"]

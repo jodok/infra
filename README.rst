@@ -5,23 +5,24 @@ README for my infrastructure
 I've decided to share and document my own infrastructure. So get inspired and
 provide me feedback.
 
+Ubuntu is the preferred distribution for new servers.
+
 This README assumes there's a user `admin` that we use to bootstrap the system
 and we're going to use him for administrative tasks.
 
-You can create an admin user with the following command (as root).
-On Ubuntu based systems you might want to use the group `admin` instead of
-`wheel` (`-g` if group already exists)::
+You can create an admin user with the following command (as root). On Ubuntu
+use the `sudo` group::
 
-  useradd -m -G wheel admin
+  useradd -m -G sudo admin
 
 I prefer to be able to run ``sudo`` as admin user without entering a password
 therefor I set ``/etc/sudoers`` like this::
 
-  ## Allows people in group wheel to run all commands
-  # %wheel  ALL=(ALL) ALL
+  ## Allows people in group sudo to run all commands
+  # %sudo  ALL=(ALL:ALL) ALL
 
   ## Same thing without a password
-  %wheel  ALL=(ALL) NOPASSWD: ALL
+  %sudo  ALL=(ALL:ALL) NOPASSWD: ALL
 
 Make sure your hostname is set correctly. The following command should show the
 fully qualified domainname of your host::
@@ -32,43 +33,42 @@ In case this doesn't show the desired hostname (FQDN), correct it with::
 
   sudo hostnamectl set-hostname your-new-hostname.your-domain
 
-We also assume that SELINUX is disabled. Disabling SELINUX requires a system
-restart.
 
-Going forward CentOS Stream is the preferred distribution. In case the base
-image was based on CentOS 8, move to Stream::
+Cloud-init bootstrap (Ubuntu)
+=============================
 
-  dnf install centos-release-stream
-  dnf swap centos-{linux,stream}-repos
-  dnf distro-sync
+The file ``cloud-init/ubuntu.yaml`` bootstraps a new Ubuntu VPS. It will:
 
+- create the ``admin`` user (with passwordless sudo)
+- install Salt via the Salt Project repository
+- clone this repository from GitHub
+- configure ``salt-minion`` for local usage
+- run the first local ``salt-call`` from the cloned repository
 
-Local installation of Salt (CentOS)
-===================================
+Before using it:
 
-First install salt-minion (and the required repositories)::
+- Replace the placeholder SSH key in the file.
+- Optionally set ``hostname`` and ``fqdn`` in the cloud-init file if your VPS
+  provider does not set the hostname for you. The cloud-init run writes
+  ``/etc/salt/minion_id`` based on ``hostname -f``.
+- Adjust the repository URL if you're using a fork.
 
-  sudo dnf config-manager --set-enabled PowerTools
-  sudo dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm
-  sudo dnf -y install https://repo.saltstack.com/py3/redhat/salt-py3-repo-latest.el8.noarch.rpm
-  sudo dnf -y install salt-minion git
 
 Local installation of Salt (Ubuntu)
 ===================================
 
-Install salt-minion (and the required repositories)::
+Install salt-minion from the Salt Project DEB repository::
 
-  # Download key
-  sudo curl -fsSL -o /usr/share/keyrings/salt-archive-keyring.gpg https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest/salt-archive-keyring.gpg
-  # Create apt sources list file
-  echo "deb [signed-by=/usr/share/keyrings/salt-archive-keyring.gpg arch=amd64] https://repo.saltproject.io/py3/ubuntu/20.04/amd64/latest focal main" | sudo tee /etc/apt/sources.list.d/salt.list
+  sudo mkdir -p /etc/apt/keyrings
+  sudo curl -fsSL https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public | sudo tee /etc/apt/keyrings/salt-archive-keyring.pgp
+  sudo curl -fsSL https://github.com/saltstack/salt-install-guide/releases/latest/download/salt.sources | sudo tee /etc/apt/sources.list.d/salt.sources
 
-  apt-get update
-  apt-get install salt-minion
+  sudo apt-get update
+  sudo apt-get install -y salt-minion git
 
 
-Local installation of Salt (OS independent)
-===========================================
+Local Salt configuration
+========================
 
 Clone this repository to a working folder of the ``admin`` user::
 
@@ -91,6 +91,7 @@ To make sure the host can be correctly identified when applying the states
 create the file ``/etc/salt/minion_id``::
 
   echo $(hostname -f) | sudo tee -a /etc/salt/minion_id
+
 
 GPG encryption of pillar data
 -----------------------------
@@ -128,6 +129,7 @@ In case you can't enter an empty password you might need to configure pinentry::
   sudo update-alternatives --config pinentry
 
 and set it to `pinentry-tty`
+
 
 The first salt run
 ------------------
