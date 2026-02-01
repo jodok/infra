@@ -1,8 +1,9 @@
 #cloud-config
 
-# Hetzner normally sets the hostname, but we pin it here to avoid surprises.
-hostname: bertrand
-fqdn: bertrand.batlogg.com
+# make sure admin user is created with sudo privileges and SSH key access
+# install salt-minion from official SaltStack repository
+# clone infra repository if not already present
+# set FQDN based on existing hostname and batlogg.com domain
 
 users:
   - name: admin
@@ -34,6 +35,7 @@ write_files:
         - "secrets:vault"
 
 runcmd:
+  - [bash, -lc, "short_name=$(hostname -s); fqdn=\"${short_name}.batlogg.com\"; hostnamectl set-hostname \"${fqdn}\""]
   - [bash, -lc, "mkdir -p /etc/apt/keyrings"]
   - [bash, -lc, "curl -fsSL https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public | tee /etc/apt/keyrings/salt-archive-keyring.pgp >/dev/null"]
   - [bash, -lc, "curl -fsSL https://github.com/saltstack/salt-install-guide/releases/latest/download/salt.sources | tee /etc/apt/sources.list.d/salt.sources >/dev/null"]
