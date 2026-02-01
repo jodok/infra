@@ -6,7 +6,7 @@ fail2ban:
     - watch:
       - file: /etc/fail2ban/fail2ban.local
 
-/etc/fail2ban/fail2ban.local:
+/etc/fail2ban/jail.local:
   file.managed:
     - contents: |
         [sshd]

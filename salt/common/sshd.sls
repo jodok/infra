@@ -9,4 +9,3 @@ ssh:
     - pattern: '^#?\s*PermitRootLogin\b.*$'
     - repl: 'PermitRootLogin no'
     - append_if_not_found: True
-    - backup: True
