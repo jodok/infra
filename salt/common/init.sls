@@ -2,6 +2,7 @@ include:
   - common.sudoers
   - common.sshd
   - common.fail2ban
+  - common.salt
 {% if grains['os'] == 'CentOS' %}
   - common.centos
 {% endif %}
