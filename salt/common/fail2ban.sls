@@ -4,7 +4,7 @@ fail2ban:
     - name: fail2ban
     - enable: True
     - watch:
-      - file: /etc/fail2ban/fail2ban.local
+      - file: /etc/fail2ban/jail.local
 
 /etc/fail2ban/jail.local:
   file.managed:
