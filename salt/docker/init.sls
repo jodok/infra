@@ -35,7 +35,7 @@ docker:
     - require:
       - file: /etc/apt/sources.list.d/docker.sources
   group.present:
-    - adduser:
+    - addusers:
       - admin
 
   {%- endif %}
