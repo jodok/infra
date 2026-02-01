@@ -1,8 +1,8 @@
 # newer Ubuntu versions use sshd.socket, disable it
 sshd.socket:
-    service.stopped:
+    service.dead:
     - enable: False
-    
+
 # use ssh service instead
 ssh:
   service.running:
