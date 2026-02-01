@@ -53,6 +53,19 @@ Before using it:
   ``/etc/salt/minion_id`` based on ``hostname -f``.
 - Adjust the repository URL if you're using a fork.
 
+Including external cloud-init snippets
+=====================================
+
+Some VPS providers allow referencing additional cloud-init files with an
+``#include`` directive. When supported, you can include a remote init file like
+this (the directive must be on its own line)::
+
+  #include
+  https://URLtoCode/config.yaml
+
+Use this to keep host-specific cloud-init files small and pull shared setup
+logic from a central location.
+
 
 Local installation of Salt (Ubuntu)
 ===================================
