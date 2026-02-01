@@ -14,6 +14,3 @@ fail2ban:
         maxretry = 5
         findtime = 10m
         bantime = 1h
-    - user: root
-    - group: root
-    - mode: '0644'

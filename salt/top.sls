@@ -5,5 +5,7 @@ base:
   - bartok
   'bertone.batlogg.com':
   - bertone
+  'bertrand.batlogg.com':
+  - bertrand
   'janos.batlogg.com':
   - janos

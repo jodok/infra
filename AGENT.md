@@ -1,3 +1,44 @@
+# Agent Instructions
+
+## SaltStack-specific instructions (this repo is executed on servers)
+
+This repository contains Salt states and pillar data that are applied directly to Ubuntu servers.
+Changes here affect live system configuration.
+
+### Execution model
+- Salt formulas in `salt/` are applied via `salt-call state.apply` or highstate.
+- Pillars in `pillar/` provide configuration and may contain encrypted values.
+- Treat all edits as infrastructure changes, not just code changes.
+
+### Required workflow for changes
+- Prefer idempotent states (safe to run repeatedly).
+- Never introduce interactive commands in states.
+- Validate syntax before committing:
+  - `salt-call --local state.show_sls <state>`
+  - `salt-call --local state.apply test=True`
+
+### Secrets handling
+- Sensitive pillar values are encrypted with GPG renderer.
+- Do not commit plaintext secrets.
+- Encrypted pillar files must remain decryptable on the Salt master.
+
+### Target OS assumptions
+- Primary target is Ubuntu 24.04+ on Hetzner cloud-init provisioned hosts.
+- Systemd is present; use `service.running` not init scripts.
+
+### Formatting and conventions
+- Use Jinja sparingly; keep states readable.
+- Prefer `pkg.installed`, `file.managed`, `service.running`.
+- Avoid shell commands unless no Salt module exists.
+
+### Before proposing changes
+Always answer:
+- What state/pillar is affected?
+- What host impact occurs?
+- How can it be tested safely (`test=True`)?
+
+## General guidelines for all agents
+
 - Delete unused or obsolete files when your changes make them irrelevant (refactors, feature removals, etc.), and revert files only when the change is yours or explicitly requested. If a git operation leaves you unsure about other agents' in-flight work, stop and coordinate instead of deleting.
 - **Before attempting to delete a file to resolve a local type/lint failure, stop and ask the user.** Other agents are often editing adjacent files; deleting their work to silence an error is never acceptable without explicit approval.
 - NEVER edit `.env` or any environment variable files—only the user may change them.
