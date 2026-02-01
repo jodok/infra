@@ -34,4 +34,8 @@ docker:
     - refresh: True
     - require:
       - file: /etc/apt/sources.list.d/docker.sources
+  group.present:
+    - adduser:
+      - admin
+
   {%- endif %}
