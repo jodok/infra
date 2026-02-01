@@ -2,7 +2,7 @@
 /mnt/data:
     blockdev.formatted:
         - name: /dev/disk/by-id/scsi-0HC_Volume_104549705
-    file.directory
+    file.directory:
         - user: root
         - group: root
         - mode: "0755"
