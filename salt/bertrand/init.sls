@@ -1,2 +1,3 @@
 include:
+- bertrand.volumes
 - docker
