@@ -2,73 +2,28 @@
 README for my infrastructure
 ============================
 
-I've decided to share and document my own infrastructure. So get inspired and
-provide me feedback.
+This repo contains the Salt states and pillar data for my servers. We run on
+Hetzner and bootstrap new VPS instances via cloud-init.
 
-Ubuntu is the preferred distribution for new servers.
+Hetzner cloud-init
+==================
 
-This README assumes there's a user `admin` that we use to bootstrap the system
-and we're going to use him for administrative tasks.
-
-You can create an admin user with the following command (as root). On Ubuntu
-use the `sudo` group::
-
-  useradd -m -G sudo admin
-
-I prefer to be able to run ``sudo`` as admin user without entering a password
-therefor I set ``/etc/sudoers`` like this::
-
-  ## Allows people in group sudo to run all commands
-  # %sudo  ALL=(ALL:ALL) ALL
-
-  ## Same thing without a password
-  %sudo  ALL=(ALL:ALL) NOPASSWD: ALL
-
-Make sure your hostname is set correctly. The following command should show the
-fully qualified domainname of your host::
-
-  hostname -f
-
-In case this doesn't show the desired hostname (FQDN), correct it with::
-
-  sudo hostnamectl set-hostname your-new-hostname.your-domain
-
-
-Cloud-init bootstrap (Ubuntu)
-=============================
-
-The file ``cloud-init/ubuntu.yaml`` bootstraps a new Ubuntu VPS. It will:
-
-- create the ``admin`` user (with passwordless sudo)
-- install Salt via the Salt Project repository
-- clone this repository from GitHub
-- configure ``salt-minion`` for local usage
-- run the first local ``salt-call`` from the cloned repository
-
-Before using it:
-
-- Replace the placeholder SSH key in the file.
-- Optionally set ``hostname`` and ``fqdn`` in the cloud-init file if your VPS
-  provider does not set the hostname for you. The cloud-init run writes
-  ``/etc/salt/minion_id`` based on ``hostname -f``.
-- Adjust the repository URL if you're using a fork.
-
-Including external cloud-init snippets
-=====================================
-
-Some VPS providers allow referencing additional cloud-init files with an
-``#include`` directive. When supported, you can include a remote init file like
-this (the directive must be on its own line)::
+In Hetzner, paste a cloud-init file when creating a new server. We use the
+``#include`` directive to pull the shared bootstrap config from this repo::
 
   #include
-  https://URLtoCode/config.yaml
+  https://raw.githubusercontent.com/jodok/infra/refs/heads/master/cloud-init/ubuntu.yaml
 
-Use this to keep host-specific cloud-init files small and pull shared setup
-logic from a central location.
+What the cloud-init does:
 
+- creates the ``admin`` user with passwordless sudo
+- installs Salt from the Salt Project repository
+- clones this repo to ``/home/admin/sandbox/infra``
+- configures ``salt-minion`` for local mode
+- runs the first ``salt-call --local`` from the cloned repo
 
-Local installation of Salt (Ubuntu)
-===================================
+Local Salt install (if not using cloud-init)
+=============================================
 
 Install salt-minion from the Salt Project DEB repository::
 
@@ -78,32 +33,6 @@ Install salt-minion from the Salt Project DEB repository::
 
   sudo apt-get update
   sudo apt-get install -y salt-minion git
-
-
-Local Salt configuration
-========================
-
-Clone this repository to a working folder of the ``admin`` user::
-
-  git clone https://github.com/jodok/infra /home/admin/sandbox/infra
-
-Now, configure salt to not connect to a salt master, but rather use the local
-files. Make sure the following options are set in ``/etc/salt/minion``::
-
-  file_client: local
-  file_roots:
-    base:
-    - /home/admin/sandbox/infra/salt
-  pillar_roots:
-    base:
-    - /home/admin/sandbox/infra/pillar
-  decrypt_pillar:
-  - 'secrets:vault'
-
-To make sure the host can be correctly identified when applying the states
-create the file ``/etc/salt/minion_id``::
-
-  echo $(hostname -f) | sudo tee -a /etc/salt/minion_id
 
 
 GPG encryption of pillar data
@@ -144,9 +73,8 @@ In case you can't enter an empty password you might need to configure pinentry::
 and set it to `pinentry-tty`
 
 
-The first salt run
-------------------
+Notes
+-----
 
-Here we go! We're ready to apply the state to the local node::
-
-  sudo salt-call --local state.apply terse=true
+- The bootstrap derives the FQDN from the existing hostname and appends
+  ``batlogg.com``.
