@@ -1,3 +1,0 @@
-dns
-spf
-reverse lookup
