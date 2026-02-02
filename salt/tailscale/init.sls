@@ -20,3 +20,11 @@ tailscale:
     - require:
       - file: /etc/apt/sources.list.d/tailscale.sources
   service.enabled: []
+
+net.ipv4.ip_forward:
+  sysctl.present:
+    - value: 1
+
+net.ipv6.conf.all.forwarding:
+  sysctl.present:
+    - value: 1
