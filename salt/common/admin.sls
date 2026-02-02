@@ -1,9 +1,3 @@
-include:
-  - bertrand.volumes
-  - docker
-  - tailscale
-  - openclaw
-
 /home/admin/sandbox:
   file.directory:
     - user: admin

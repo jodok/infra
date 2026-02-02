@@ -2,7 +2,7 @@
 /dev/disk/by-id/scsi-0HC_Volume_104549705:
   blockdev.formatted: []
 
-/mnt/data:
+/var/lib/docker:
   file.directory:
     - user: root
     - group: root
@@ -16,11 +16,4 @@
     - opts: discard,defaults
     - require:
       - blockdev: /dev/disk/by-id/scsi-0HC_Volume_104549705
-      - file: /mnt/data
-
-/home/admin/sandbox:
-  file.symlink:
-    - target: /mnt/data/sandbox
-    - force: True
-    - require:
-      - file: /mnt/data
+      - file: /var/lib/docker

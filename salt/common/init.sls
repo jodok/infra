@@ -1,4 +1,5 @@
 include:
+  - common.admin
   - common.sudoers
   - common.sshd
   - common.fail2ban
