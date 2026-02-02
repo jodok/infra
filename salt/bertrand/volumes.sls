@@ -17,3 +17,10 @@
     - require:
       - blockdev: /dev/disk/by-id/scsi-0HC_Volume_104549705
       - file: /mnt/data
+
+/home/admin/sandbox:
+  file.symlink:
+    - target: /mnt/data/sandbox
+    - force: True
+    - require:
+      - file: /mnt/data
