@@ -14,7 +14,7 @@
     - mode: "0755"
     - makedirs: True
     - require:
-      - mount: /mnt/data/openclaw
+      - file: /mnt/data/openclaw
 
 /mnt/data/openclaw/.openclaw/workspace:
   file.directory:
@@ -23,4 +23,4 @@
     - mode: "0755"
     - makedirs: True
     - require:
-      - mount: /mnt/data/openclaw/.openclaw
+      - file: /mnt/data/openclaw/.openclaw
