@@ -6,7 +6,7 @@
   file.directory:
     - user: root
     - group: root
-    - mode: "0755"
+    - mode: "0775"
   mount.mounted:
     - device: /dev/disk/by-id/scsi-0HC_Volume_104549705
     - fstype: ext4
