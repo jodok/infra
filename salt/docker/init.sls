@@ -10,7 +10,6 @@ docker-ce:
   file.managed:
     - source: https://download.docker.com/linux/ubuntu/gpg
     - source_hash: 1500c1f56fa9e26b9b8f42452a553675796ade0807cdce11975eb98170b3a570
-    - makedirs: True
 
 /etc/apt/sources.list.d/docker.sources:
   file.managed:
