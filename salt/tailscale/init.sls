@@ -6,8 +6,11 @@
 /etc/apt/sources.list.d/tailscale.sources:
   file.managed:
     - contents: |
-        # Tailscale packages for ubuntu noble
-        deb [signed-by=/usr/share/keyrings/tailscale-archive-keyring.gpg] https://pkgs.tailscale.com/stable/ubuntu noble main
+        Types: deb
+        URIs: https://pkgs.tailscale.com/stable/ubuntu
+        Suites: {{ grains['oscodename'] }}
+        Components: main
+        Signed-By: /usr/share/keyrings/tailscale-archive-keyring.gpg
     - require:
       - file: /usr/share/keyrings/tailscale-archive-keyring.gpg
 
