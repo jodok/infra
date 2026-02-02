@@ -19,7 +19,6 @@ tailscale:
     - refresh: True
     - require:
       - file: /etc/apt/sources.list.d/tailscale.sources
-  service.enabled: []
 
 net.ipv4.ip_forward:
   sysctl.present:
