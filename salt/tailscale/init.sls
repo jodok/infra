@@ -29,10 +29,14 @@ net.ipv6.conf.all.forwarding:
     - value: 1
 
 # performance tuning for tailscale interface
-eth0:
-  ethtool.coalesce:
-    - rx_udp_gro_forwarding: on
-    - rx_gro_list: off
+# https://tailscale.com/kb/1320/performance-best-practices#linux-optimizations-for-subnet-routers-and-exit-nodes
+configure_network_offloading:
+  cmd.run:
+    - name: ethtool -K $(ip -o route get 8.8.8.8 | cut -f 5 -d " ") rx-udp-gro-forwarding on rx-gro-list off
+    - unless: |
+        NETDEV=$(ip -o route get 8.8.8.8 | cut -f 5 -d " ")
+        ethtool -k $NETDEV | grep -q 'rx-udp-gro-forwarding: on' && \
+        ethtool -k $NETDEV | grep -q 'rx-gro-list: off'
 # make ethtool settings persistent across reboots
 /etc/networkd-dispatcher/routable.d/50-tailscale:
   file.managed:
@@ -40,4 +44,4 @@ eth0:
         #!/bin/sh
         ethtool -K $(ip -o route get 8.8.8.8 | cut -f 5 -d " ") rx-udp-gro-forwarding on rx-gro-list off
     - mode: 755
-    - makedirs: True
+
