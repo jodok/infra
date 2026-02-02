@@ -20,10 +20,24 @@ tailscale:
     - require:
       - file: /etc/apt/sources.list.d/tailscale.sources
 
+# exit node configuration
 net.ipv4.ip_forward:
   sysctl.present:
     - value: 1
-
 net.ipv6.conf.all.forwarding:
   sysctl.present:
     - value: 1
+
+# performance tuning for tailscale interface
+eth0:
+  ethtool.coalesce:
+    - rx_udp_gro_forwarding: on
+    - rx_gro_list: off
+# make ethtool settings persistent across reboots
+/etc/networkd-dispatcher/routable.d/50-tailscale:
+  file.managed:
+    - contents: |
+        #!/bin/sh
+        ethtool -K $(ip -o route get 8.8.8.8 | cut -f 5 -d " ") rx-udp-gro-forwarding on rx-gro-list off
+    - mode: 755
+    - makedirs: True
