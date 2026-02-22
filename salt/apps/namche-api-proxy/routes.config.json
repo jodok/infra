@@ -13,26 +13,6 @@
       "targetBaseUrl": "https://tashi.khumbu.namche.ai:8443/api",
       "stripPrefix": "/webhooks/agent/tashi/",
       "ingressSecretEnv": "TASHI_WEBHOOK_SECRET"
-    },
-    {
-      "id": "pema",
-      "match": {
-        "host": "api.namche.ai",
-        "pathPrefix": "/webhooks/agent/pema/"
-      },
-      "targetBaseUrl": "https://pema.khumbu.namche.ai:8443/api",
-      "stripPrefix": "/webhooks/agent/pema/",
-      "ingressSecretEnv": "PEMA_WEBHOOK_SECRET"
-    },
-    {
-      "id": "nima",
-      "match": {
-        "host": "api.namche.ai",
-        "pathPrefix": "/webhooks/agent/nima/"
-      },
-      "targetBaseUrl": "https://nima.khumbu.namche.ai:8443/api",
-      "stripPrefix": "/webhooks/agent/nima/",
-      "ingressSecretEnv": "NIMA_WEBHOOK_SECRET"
     }
   ]
 }
