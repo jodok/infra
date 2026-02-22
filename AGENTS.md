@@ -33,6 +33,7 @@ Changes here affect live system configuration.
 - Host-specific data must not leak into generic modules.
 - Generic modules must not assume one host/domain.
 - Keep naming aligned with scope (`nginx.cloudflare` is reusable; `bertrand.*` is host-local).
+- Keep shared filesystem primitives with the owning module (for example module-level cert dirs/CA bundles), while host states only manage host-specific leaf certs/keys and vhost wiring.
 
 ### Secrets and certificates
 - Keep private keys and secrets in encrypted pillar.

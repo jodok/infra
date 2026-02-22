@@ -4,6 +4,21 @@
   - name: /usr/bin/openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
   - unless: test -r /etc/ssl/certs/dhparam.pem
 
+/etc/nginx/certs:
+  file.directory:
+  - user: root
+  - group: root
+  - dir_mode: "0750"
+
+/etc/nginx/certs/cloudflare-origin-ca-rsa-root.pem:
+  file.managed:
+  - user: root
+  - group: root
+  - mode: "0644"
+  - source: salt://nginx/origin_ca_rsa_root.pem
+  - require:
+    - file: /etc/nginx/certs
+
 /etc/nginx/default.d:
   file.directory:
   - user: root
@@ -26,6 +41,7 @@ nginx-reload-cloudflare:
   cmd.run:
   - name: systemctl try-restart nginx
   - onchanges:
+    - file: /etc/nginx/certs/cloudflare-origin-ca-rsa-root.pem
     - file: /etc/nginx/default.d/redirect-https.conf
     - file: /etc/nginx/conf.d/ssl.conf.inc
     - file: /etc/nginx/conf.d/redirect-https.conf.inc
