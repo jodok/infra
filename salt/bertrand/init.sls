@@ -37,6 +37,4 @@ nginx-reload:
   - onchanges:
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.crt
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.key
-    - file: /etc/nginx/conf.d/ssl.conf.inc
-    - file: /etc/nginx/conf.d/redirect-https.conf.inc
     - file: /etc/nginx/conf.d/namche.ai.conf  
