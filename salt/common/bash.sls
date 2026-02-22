@@ -1,0 +1,38 @@
+/etc/bash.bashrc-prompt:
+  file.blockreplace:
+    - name: /etc/bash.bashrc
+    - marker_start: "# START managed by salt: common.bash prompt"
+    - marker_end: "# END managed by salt: common.bash prompt"
+    - append_if_not_found: True
+    - content: |
+        parse_git_branch() {
+          git branch --show-current 2>/dev/null
+        }
+
+        prompt_command() {
+          local exit="$?"
+
+          # hostname (red)
+          local host="\[\033[31m\]\h\[\033[0m\] "
+
+          # arrow (green/red based on exit)
+          if [ "$exit" -eq 0 ]; then
+            local arrow="\[\033[1;32m\]➜\[\033[0m\] "
+          else
+            local arrow="\[\033[1;31m\]➜\[\033[0m\] "
+          fi
+
+          # cwd (cyan)
+          local cwd="\[\033[36m\]\W\[\033[0m\] "
+
+          # git branch
+          local git_branch
+          git_branch="$(parse_git_branch)"
+          if [ -n "$git_branch" ]; then
+            git_branch="git:($git_branch) "
+          fi
+
+          PS1="${host}${arrow}${cwd}${git_branch}"
+        }
+
+        PROMPT_COMMAND=prompt_command

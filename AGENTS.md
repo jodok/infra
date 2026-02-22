@@ -16,51 +16,36 @@ Changes here affect live system configuration.
 - Validate syntax before committing:
   - `salt-call --local state.show_sls <state>`
   - `salt-call --local state.apply test=True`
-- For host package changes on `bertrand`, use this workflow:
-  - Add the state include in `salt/bertrand/init.sls` (for nginx: `- nginx`).
-  - Create a branch, push to GitHub, and open a pull request.
-  - Wait for acknowledgement, then merge to `main`.
-  - SSH to `admin@bertrand`, run `git pull`, then `sudo salt-call --local state.apply terse=true`.
-
-### Deployment learnings (bertrand)
-- Remote checkout path is `~/sandbox/infra` for user `admin`.
-- Prefer non-interactive deployment command to avoid hanging on sudo prompts:
+- Use PR-based merges to `main`; do not push directly to protected branches.
+- Deploy from the host checkout (`~/sandbox/infra`) with non-interactive sudo:
   - `ssh admin@bertrand 'cd ~/sandbox/infra && git pull && sudo -n salt-call --local state.apply terse=true'`
-- If `git pull` is blocked by local modifications, inspect first (`git status`, `git diff`) and only then stash/resolve intentionally before pulling.
-- Repository branch protections require PR-based merges to `main`; do not rely on direct pushes to `main`.
-- The human reviewer/user performs PR approvals; agents should not self-approve unless explicitly asked.
-- When certbot fails during apply, capture and report the exact failing domains/status codes (for DNS/HTTP challenge debugging) instead of masking the error.
+- After deployment, report the Salt summary (`Succeeded`/`Failed`) and key changed states.
 
-## Terraform-specific instructions
+### Salt design principles
+- Separate reusable building blocks from host-specific states.
+- Put reusable service/module logic under `salt/<module>/`.
+- Put host-specific wiring, certs, and vhost configs under `salt/<host>/`.
+- Keep includes explicit: host init states should compose reusable modules plus host-local files.
+- Minimize Jinja; prefer clear declarative states unless templating is truly needed.
+- Keep states idempotent and deterministic.
 
-- Treat Terraform changes as production infrastructure changes.
-- Always run `terraform fmt` on edited `.tf` files.
-- Validate before commit with `terraform validate`.
-- Generate a plan and review it before apply:
-  - `terraform plan -out=tfplan`
-  - If apply is approved: `terraform apply tfplan`
-- Never apply Terraform changes automatically without explicit user approval.
-- Keep Terraform state/backends unchanged unless explicitly requested.
+### Boundaries and ownership
+- Host-specific data must not leak into generic modules.
+- Generic modules must not assume one host/domain.
+- Keep naming aligned with scope (`nginx.cloudflare` is reusable; `bertrand.*` is host-local).
 
-### Secrets handling
-- Sensitive pillar values are encrypted with GPG renderer.
+### Secrets and certificates
+- Keep private keys and secrets in encrypted pillar.
 - Do not commit plaintext secrets.
-- Encrypted pillar files must remain decryptable on the Salt master.
+- Public certs/CA files can be committed when intentionally non-secret.
+- For TLS chains, set `ssl_trusted_certificate` to issuer CA/root material, not the leaf cert.
 
-### Target OS assumptions
-- Primary target is Ubuntu 24.04+ on Hetzner cloud-init provisioned hosts.
-- Systemd is present; use `service.running` not init scripts.
-
-### Formatting and conventions
-- Use Jinja sparingly; keep states readable.
-- Prefer `pkg.installed`, `file.managed`, `service.running`.
-- Avoid shell commands unless no Salt module exists.
-
-### Before proposing changes
-Always answer:
+### Operational thinking
+Before proposing or applying a change, explicitly answer:
 - What state/pillar is affected?
-- What host impact occurs?
-- How can it be tested safely (`test=True`)?
+- Is this reusable module logic or host-specific wiring?
+- What is the blast radius if this is wrong?
+- How can it be tested safely (`test=True`) before apply?
 
 ## General guidelines for all agents
 
