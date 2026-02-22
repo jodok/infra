@@ -1,12 +1,13 @@
 infra:
   group.present: []
 
-deploy-user:
+deploy:
   user.present:
     - shell: /bin/bash
     - home: /home/deploy
     - optional_groups:
       - infra
+      - www-data
     - createhome: True
     - require:
       - group: infra
@@ -17,7 +18,7 @@ deploy-user:
     - group: deploy
     - mode: "0700"
     - require:
-      - user: deploy-user
+      - user: deploy
 
 /home/deploy/.ssh/authorized_keys:
   file.managed:
