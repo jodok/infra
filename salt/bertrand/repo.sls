@@ -30,6 +30,7 @@ tashi:
 normalize-bertrand-infra-perms:
   cmd.run:
     - name: |
+        chown -R admin:infra /srv/infra
         chgrp -R infra /srv/infra
         chmod -R g+rwX /srv/infra
         find /srv/infra -type d -exec chmod g+s {} +
@@ -44,6 +45,7 @@ admin-safe-directory-infra:
     - runas: admin
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
+      - user: admin
       - file: /srv/infra
 
 tashi-safe-directory-infra:
@@ -52,4 +54,5 @@ tashi-safe-directory-infra:
     - runas: tashi
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
+      - user: tashi
       - file: /srv/infra
