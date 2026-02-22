@@ -13,7 +13,7 @@ include:
   - user: root
   - group: root
   - mode: "0644"
-  - source: salt://bertrand/origin_cert_namche.pem
+  - source: salt://bertrand/namche.ai.cloudflare-origin.crt
   - require:
     - file: /etc/nginx/certs
 
@@ -22,7 +22,7 @@ include:
   - user: root
   - group: root
   - mode: "0600"
-  - contents_pillar: secrets:vault:cloudflare-origin-certificates:namche:key
+  - contents_pillar: secrets:vault:cloudflare-origin-certificates:namche.ai.cloudflare-origin.key
   - show_changes: false
   - require:
     - file: /etc/nginx/certs
