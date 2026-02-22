@@ -19,22 +19,13 @@ tashi:
     - group: root
     - mode: "0755"
 
-move-bertrand-infra-checkout:
-  cmd.run:
-    - name: |
-        if [ -d /home/admin/sandbox/infra/.git ] && [ ! -e /srv/infra/.git ]; then
-          mv /home/admin/sandbox/infra /srv/infra
-        fi
-    - require:
-      - file: /srv
-
 /srv/infra:
   file.directory:
     - user: admin
     - group: infra
     - mode: "2775"
     - require:
-      - cmd: move-bertrand-infra-checkout
+      - file: /srv
 
 normalize-bertrand-infra-perms:
   cmd.run:
