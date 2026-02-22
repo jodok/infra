@@ -4,9 +4,9 @@
     - group: www-data
     - mode: "0750"
 
-/etc/namche-api-proxy/config.yaml:
+/etc/namche-api-proxy/config.yaml.example:
   file.managed:
-    - source: salt://apps/namche-api-proxy/config.yaml
+    - source: salt://apps/namche-api-proxy/config.yaml.example
     - user: root
     - group: www-data
     - mode: "0640"
@@ -31,5 +31,4 @@ namche-api-proxy-service-enabled:
     - name: namche-api-proxy
     - require:
       - file: /etc/systemd/system/namche-api-proxy.service
-      - file: /etc/namche-api-proxy/config.yaml
       - cmd: namche-api-proxy-systemd-daemon-reload
