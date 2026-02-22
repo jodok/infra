@@ -1,6 +1,6 @@
 include:
-  - bertrand.deploy
-  - bertrand.volumes
+  - hosts.bertrand.deploy
+  - hosts.bertrand.volumes
   - docker
   - tailscale
   - openclaw
@@ -12,7 +12,7 @@ include:
   - user: root
   - group: root
   - mode: "0644"
-  - source: salt://bertrand/namche.ai.cloudflare-origin.crt
+  - source: salt://hosts/bertrand/namche.ai.cloudflare-origin.crt
   - require:
     - file: /etc/nginx/certs
 
@@ -28,7 +28,7 @@ include:
 
 /etc/nginx/conf.d/namche.ai.conf:
   file.managed:
-  - source: salt://bertrand/namche.ai.conf
+  - source: salt://hosts/bertrand/namche.ai.conf
 
 nginx-reload:
   cmd.run:

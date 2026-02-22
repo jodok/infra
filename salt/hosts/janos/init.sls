@@ -1,7 +1,7 @@
 include:
 - letsencrypt
 - letsencrypt.standalone
-- janos.exim
-- janos.dovecot
-- janos.user
+- hosts.janos.exim
+- hosts.janos.dovecot
+- hosts.janos.user
 - duplicity
