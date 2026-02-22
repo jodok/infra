@@ -61,9 +61,14 @@ xterm-ghostty-terminfo:
   - name: tic -x -o /usr/share/terminfo /usr/local/share/terminfo/xterm-ghostty.src
   - unless: |
       src=/usr/local/share/terminfo/xterm-ghostty.src
-      out=/usr/share/terminfo/78/xterm-ghostty
-      alt=/lib/terminfo/78/xterm-ghostty
-      { [ -e "$out" ] && [ "$out" -nt "$src" ]; } || { [ -e "$alt" ] && [ "$alt" -nt "$src" ]; }
+      out_hex=/usr/share/terminfo/78/xterm-ghostty
+      out_chr=/usr/share/terminfo/x/xterm-ghostty
+      alt_hex=/lib/terminfo/78/xterm-ghostty
+      alt_chr=/lib/terminfo/x/xterm-ghostty
+      { [ -e "$out_hex" ] && [ "$out_hex" -nt "$src" ]; } || \
+      { [ -e "$out_chr" ] && [ "$out_chr" -nt "$src" ]; } || \
+      { [ -e "$alt_hex" ] && [ "$alt_hex" -nt "$src" ]; } || \
+      { [ -e "$alt_chr" ] && [ "$alt_chr" -nt "$src" ]; }
   - require:
     - pkg: ncurses-bin
     - file: /usr/local/share/terminfo/xterm-ghostty.src
