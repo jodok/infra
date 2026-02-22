@@ -1,5 +1,5 @@
 include:
-  - hosts.bertrand.api_proxy
+  - apps.namche-api-proxy
   - hosts.bertrand.deploy
   - hosts.bertrand.volumes
   - docker

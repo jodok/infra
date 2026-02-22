@@ -21,7 +21,7 @@
 
 /etc/namche-api-proxy/routes.config.json:
   file.managed:
-    - source: salt://hosts/bertrand/namche-api-proxy.routes.config.json
+    - source: salt://apps/namche-api-proxy/routes.config.json
     - user: root
     - group: deploy
     - mode: "0640"
@@ -30,7 +30,7 @@
 
 /etc/namche-api-proxy/webhook-proxy.env:
   file.managed:
-    - source: salt://hosts/bertrand/namche-api-proxy.env
+    - source: salt://apps/namche-api-proxy/webhook-proxy.env
     - user: root
     - group: deploy
     - mode: "0640"
@@ -39,7 +39,7 @@
 
 /etc/systemd/system/namche-api-proxy.service:
   file.managed:
-    - source: salt://hosts/bertrand/namche-api-proxy.service
+    - source: salt://apps/namche-api-proxy/namche-api-proxy.service
     - user: root
     - group: root
     - mode: "0644"
