@@ -7,12 +7,6 @@ bertrand-repo-admin-group-membership:
     - optional_groups:
       - infra
 
-bertrand-repo-tashi-group-membership:
-  user.present:
-    - name: tashi
-    - optional_groups:
-      - infra
-
 bertrand-repo-deploy-group-membership:
   user.present:
     - name: deploy
@@ -52,15 +46,6 @@ admin-safe-directory-infra:
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
       - user: bertrand-repo-admin-group-membership
-      - file: /srv/infra
-
-tashi-safe-directory-infra:
-  cmd.run:
-    - name: git config --global --add safe.directory /srv/infra
-    - runas: tashi
-    - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
-    - require:
-      - user: bertrand-repo-tashi-group-membership
       - file: /srv/infra
 
 deploy-safe-directory-infra:
