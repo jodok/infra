@@ -25,5 +25,5 @@ jobs:
 
       - name: Pull and apply Salt on bertrand
         run: |
-          ssh -o IdentitiesOnly=yes -o IdentityAgent=none -i ~/.ssh/id_ed25519 "${{ vars.DEPLOY_USER }}@bertrand" \
+          ssh -o IdentitiesOnly=yes -o IdentityAgent=none -i ~/.ssh/id_ed25519 "deploy@bertrand" \
             'cd /srv/infra && git pull && sudo -n salt-call --local state.apply terse=true'
