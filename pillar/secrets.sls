@@ -67,8 +67,7 @@ secrets:
         =Qi9p
         -----END PGP MESSAGE-----
     cloudflare-origin-certificates:
-      namche:
-        key: |
+      namche.ai.cloudflare-origin.key: |
           -----BEGIN PGP MESSAGE-----
 
           hQIMA5ZHxiCsLfFyAQ//QqJV8/EwYQiM4k73xeTJ/7usMioLRaF3eCKNLmcecIEQ

@@ -1,6 +1,5 @@
 include:
   - bertrand.deploy
-  - bertrand.repo
   - bertrand.volumes
   - docker
   - tailscale
@@ -8,27 +7,12 @@ include:
   - nginx
   - nginx.cloudflare
 
-/etc/nginx/certs:
-  file.directory:
-  - user: root
-  - group: root
-  - dir_mode: "0750"
-
 /etc/nginx/certs/namche.ai.cloudflare-origin.crt:
   file.managed:
   - user: root
   - group: root
   - mode: "0644"
-  - source: salt://bertrand/origin_cert_namche.pem
-  - require:
-    - file: /etc/nginx/certs
-
-/etc/nginx/certs/cloudflare-origin-ca-rsa-root.pem:
-  file.managed:
-  - user: root
-  - group: root
-  - mode: "0644"
-  - source: salt://nginx/origin_ca_rsa_root.pem
+  - source: salt://bertrand/namche.ai.cloudflare-origin.crt
   - require:
     - file: /etc/nginx/certs
 
@@ -37,7 +21,7 @@ include:
   - user: root
   - group: root
   - mode: "0600"
-  - contents_pillar: secrets:vault:cloudflare-origin-certificates:namche:key
+  - contents_pillar: secrets:vault:cloudflare-origin-certificates:namche.ai.cloudflare-origin.key
   - show_changes: false
   - require:
     - file: /etc/nginx/certs
@@ -51,8 +35,5 @@ nginx-reload:
   - name: systemctl try-restart nginx.service
   - onchanges:
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.crt
-    - file: /etc/nginx/certs/cloudflare-origin-ca-rsa-root.pem
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.key
-    - file: /etc/nginx/conf.d/ssl.conf.inc
-    - file: /etc/nginx/conf.d/redirect-https.conf.inc
     - file: /etc/nginx/conf.d/namche.ai.conf  
