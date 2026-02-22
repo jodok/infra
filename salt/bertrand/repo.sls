@@ -1,14 +1,16 @@
 infra:
   group.present: []
 
-admin:
+bertrand-repo-admin-group-membership:
   user.present:
+    - name: admin
     - groups:
       - infra
     - append: True
 
-tashi:
+bertrand-repo-tashi-group-membership:
   user.present:
+    - name: tashi
     - groups:
       - infra
     - append: True
@@ -45,7 +47,7 @@ admin-safe-directory-infra:
     - runas: admin
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
-      - user: admin
+      - user: bertrand-repo-admin-group-membership
       - file: /srv/infra
 
 tashi-safe-directory-infra:
@@ -54,5 +56,5 @@ tashi-safe-directory-infra:
     - runas: tashi
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
-      - user: tashi
+      - user: bertrand-repo-tashi-group-membership
       - file: /srv/infra
