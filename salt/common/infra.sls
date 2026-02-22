@@ -1,7 +1,7 @@
 infra:
   group.present: []
 
-deploy:
+deploy-user:
   user.present:
     - shell: /bin/bash
     - home: /home/deploy
@@ -17,7 +17,7 @@ deploy:
     - group: deploy
     - mode: "0700"
     - require:
-      - user: deploy
+      - user: deploy-user
 
 /home/deploy/.ssh/authorized_keys:
   file.managed:

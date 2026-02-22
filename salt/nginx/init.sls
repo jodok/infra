@@ -23,7 +23,7 @@ deploy-www-data-group-membership:
     - optional_groups:
       - www-data
     - require:
-      - user: deploy
+      - user: deploy-user
 
 nginx-reload-base:
   cmd.run:

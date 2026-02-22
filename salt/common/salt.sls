@@ -15,7 +15,7 @@ salt-minion:
     - mode: "2775"
     - require:
       - file: /srv
-      - user: deploy
+      - user: deploy-user
       - group: infra
 
 normalize-srv-infra-perms:
@@ -35,5 +35,5 @@ deploy-safe-directory-srv-infra:
     - runas: deploy
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
-      - user: deploy
+      - user: deploy-user
       - file: /srv/infra
