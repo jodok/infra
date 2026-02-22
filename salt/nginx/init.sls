@@ -10,6 +10,13 @@ nginx:
   file.managed:
     - source: salt://nginx/redirect-https.conf
 
+/var/www/html:
+  file.directory:
+    - user: www-data
+    - group: www-data
+    - dir_mode: "2775"
+    - makedirs: True
+
 deploy-www-data-group-membership:
   user.present:
     - name: deploy

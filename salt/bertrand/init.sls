@@ -6,7 +6,6 @@ include:
   - openclaw
   - nginx
   - nginx.cloudflare
-  - salt
 
 /etc/nginx/certs/namche.ai.cloudflare-origin.crt:
   file.managed:
