@@ -17,11 +17,10 @@ nginx:
     - dir_mode: "2775"
     - makedirs: True
 
-deploy-www-data-group-membership:
-  user.present:
-    - name: deploy
-    - optional_groups:
-      - www-data
+www-data:
+  group.present:
+    - addusers:
+      - deploy
     - require:
       - user: deploy
 

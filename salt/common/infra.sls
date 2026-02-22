@@ -7,6 +7,7 @@ deploy:
     - home: /home/deploy
     - optional_groups:
       - infra
+      - www-data
     - createhome: True
     - require:
       - group: infra
