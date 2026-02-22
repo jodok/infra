@@ -8,6 +8,9 @@ include:
   - nginx
   - nginx.cloudflare
 
+nodejs:
+  - pkg.installed: []
+
 /etc/nginx/certs/namche.ai.cloudflare-origin.crt:
   file.managed:
   - user: root
