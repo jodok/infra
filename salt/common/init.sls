@@ -1,5 +1,7 @@
 include:
   - common.admin
+  - common.bash
+  - common.ghostty
   - common.sudoers
   - common.sshd
   - common.fail2ban
