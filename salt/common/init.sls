@@ -1,6 +1,7 @@
 include:
   - common.admin
   - common.bash
+  - common.deploy
   - common.ghostty
   - common.sudoers
   - common.sshd

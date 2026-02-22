@@ -1,4 +1,5 @@
 include:
+  - bertrand.deploy
   - bertrand.repo
   - bertrand.volumes
   - docker
