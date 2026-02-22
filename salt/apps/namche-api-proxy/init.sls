@@ -4,15 +4,6 @@
     - group: deploy
     - mode: "0750"
 
-/etc/namche-api-proxy/routes.config.json:
-  file.managed:
-    - source: salt://apps/namche-api-proxy/routes.config.json
-    - user: root
-    - group: deploy
-    - mode: "0640"
-    - require:
-      - file: /etc/namche-api-proxy
-
 /etc/namche-api-proxy/webhook-proxy.env:
   file.managed:
     - source: salt://apps/namche-api-proxy/webhook-proxy.env
@@ -47,9 +38,7 @@ namche-api-proxy-service-running:
     - name: namche-api-proxy
     - require:
       - service: namche-api-proxy-service-enabled
-      - file: /etc/namche-api-proxy/routes.config.json
       - file: /etc/namche-api-proxy/webhook-proxy.env
     - watch:
       - file: /etc/systemd/system/namche-api-proxy.service
-      - file: /etc/namche-api-proxy/routes.config.json
       - file: /etc/namche-api-proxy/webhook-proxy.env
