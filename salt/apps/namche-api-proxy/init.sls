@@ -45,7 +45,6 @@ namche-api-proxy-service-enabled:
 namche-api-proxy-service-running:
   service.running:
     - name: namche-api-proxy
-    - onlyif: test -f /home/deploy/apps/namche-api-proxy/index.mjs
     - require:
       - service: namche-api-proxy-service-enabled
       - file: /etc/namche-api-proxy/routes.config.json
