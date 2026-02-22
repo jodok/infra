@@ -32,14 +32,14 @@ The fastest way to bootstrap a new server on Hetzner.
 1. In the Hetzner Cloud console, when creating a new server, paste the following in the **Cloud-Init** field:
    ```
    #include
-   https://raw.githubusercontent.com/jodok/infra/refs/heads/master/cloud-init/ubuntu.yaml
+   https://raw.githubusercontent.com/jodok/infra/refs/heads/main/cloud-init/ubuntu.yaml
    ```
 
 2. Create the server and wait for cloud-init to complete (visible in the server's status page)
 
 **What cloud-init automatically does:**
 - Installs Salt from the official Salt Project repository
-- Clones this repository to `/home/admin/sandbox/infra`
+- Clones this repository to `/srv/infra`
 - Configures Salt minion for local mode
 - Sets up basic system configuration
 
@@ -84,10 +84,10 @@ Edit `/etc/salt/minion` and add:
 file_client: local
 file_roots:
   base:
-    - /home/admin/sandbox/infra/salt/states
+    - /srv/infra/salt
 pillar_roots:
   base:
-    - /home/admin/sandbox/infra/salt/pillar
+    - /srv/infra/pillar
 decrypt_pillar:
   - "secrets:vault"
 ```
@@ -97,8 +97,8 @@ decrypt_pillar:
 as the `admin` user, clone the repository:
 
 ```bash
-mkdir -p /home/admin/sandbox
-git clone https://github.com/jodok/infra.git /home/admin/sandbox/infra
+sudo install -d -o admin -g admin /srv/infra
+sudo -u admin git clone https://github.com/jodok/infra.git /srv/infra
 ```
 
 **Next steps:** Proceed to [GPG Key Setup](#gpg-key-setup)
