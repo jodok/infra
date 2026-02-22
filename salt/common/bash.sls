@@ -59,8 +59,11 @@ ncurses-bin:
 xterm-ghostty-terminfo:
   cmd.run:
   - name: tic -x -o /usr/share/terminfo /usr/local/share/terminfo/xterm-ghostty.src
+  - unless: |
+      src=/usr/local/share/terminfo/xterm-ghostty.src
+      out=/usr/share/terminfo/78/xterm-ghostty
+      alt=/lib/terminfo/78/xterm-ghostty
+      { [ -e "$out" ] && [ "$out" -nt "$src" ]; } || { [ -e "$alt" ] && [ "$alt" -nt "$src" ]; }
   - require:
     - pkg: ncurses-bin
-    - file: /usr/local/share/terminfo/xterm-ghostty.src
-  - onchanges:
     - file: /usr/local/share/terminfo/xterm-ghostty.src
