@@ -9,7 +9,7 @@ include:
 
 /etc/nginx/conf.d/namche.ai.conf:
   file.managed:
-  - source: salt://bertone/namche.ai.conf
+  - source: salt://bertrand/namche.ai.conf
 
 nginx-reload:
   cmd.run:
