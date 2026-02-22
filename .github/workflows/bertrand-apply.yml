@@ -26,4 +26,4 @@ jobs:
       - name: Pull and apply Salt on bertrand
         run: |
           ssh -o IdentitiesOnly=yes -o IdentityAgent=none -i ~/.ssh/id_ed25519 "deploy@bertrand.batlogg.com" \
-            'cd /srv/infra && git pull && sudo -n salt-call --local state.apply terse=true'
+            'cd /srv/infra && git pull && sudo -n /opt/saltstack/salt/bin/salt-call --local state.apply terse=true'
