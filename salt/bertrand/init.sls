@@ -4,7 +4,7 @@ include:
   - tailscale
   - openclaw
   - nginx
-  - cloudflare.nginx
+  - nginx.cloudflare
 
 /etc/nginx/certs:
   file.directory:
