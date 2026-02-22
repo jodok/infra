@@ -33,10 +33,6 @@
   file.managed:
   - source: salt://nginx/ssl.conf.inc
 
-/etc/nginx/conf.d/redirect-https.conf.inc:
-  file.managed:
-  - source: salt://nginx/redirect-https.conf
-
 nginx-reload-cloudflare:
   cmd.run:
   - name: systemctl try-restart nginx
@@ -44,4 +40,3 @@ nginx-reload-cloudflare:
     - file: /etc/nginx/certs/cloudflare-origin-ca-rsa-root.pem
     - file: /etc/nginx/default.d/redirect-https.conf
     - file: /etc/nginx/conf.d/ssl.conf.inc
-    - file: /etc/nginx/conf.d/redirect-https.conf.inc
