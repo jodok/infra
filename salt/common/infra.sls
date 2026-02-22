@@ -30,13 +30,13 @@ deploy:
     - require:
       - file: /home/deploy/.ssh
 
-/etc/sudoers.d/deploy-salt-call:
+/etc/sudoers.d/deploy:
   file.managed:
     - user: root
     - group: root
     - mode: "0440"
     - contents: |
-        deploy ALL=(root) NOPASSWD: /usr/bin/salt-call, /opt/saltstack/salt/bin/salt-call
+        deploy ALL=(root) NOPASSWD: /usr/bin/salt-call, /opt/saltstack/salt/bin/salt-call, /usr/bin/systemctl restart *, /usr/bin/systemctl is-active *
     - check_cmd: /usr/sbin/visudo -cf
     - require:
       - file: /etc/sudoers.d

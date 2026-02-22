@@ -11,6 +11,9 @@ include:
 nodejs:
   pkg.installed: []
 
+npm:
+  pkg.installed: []
+
 /etc/nginx/certs/namche.ai.cloudflare-origin.crt:
   file.managed:
   - user: root
