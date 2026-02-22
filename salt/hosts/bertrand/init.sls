@@ -1,4 +1,5 @@
 include:
+  - hosts.bertrand.api_proxy
   - hosts.bertrand.deploy
   - hosts.bertrand.volumes
   - docker
