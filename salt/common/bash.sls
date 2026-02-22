@@ -59,7 +59,7 @@ ncurses-bin:
 xterm-ghostty-terminfo:
   cmd.run:
   - name: tic -x -o /usr/share/terminfo /usr/local/share/terminfo/xterm-ghostty.src
-  - unless: test -e /usr/share/terminfo/78/xterm-ghostty -o -e /lib/terminfo/78/xterm-ghostty
+  - unless: test -e /usr/share/terminfo/x/xterm-ghostty -o -e /lib/terminfo/x/xterm-ghostty
   - require:
     - pkg: ncurses-bin
     - file: /usr/local/share/terminfo/xterm-ghostty.src
