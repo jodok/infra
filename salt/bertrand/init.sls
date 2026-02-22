@@ -4,16 +4,7 @@ include:
   - tailscale
   - openclaw
   - nginx
-
-# caution: this is going to run a long time on first execution
-/etc/ssl/certs/dhparam.pem:
-  cmd.run:
-  - name: /usr/bin/openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
-  - unless: test -r /etc/ssl/certs/dhparam.pem
-
-/etc/nginx/conf.d/ssl.conf.inc:
-  file.managed:
-  - source: salt://letsencrypt/ssl.conf.inc
+  - nginx.cloudflare
 
 /etc/nginx/certs:
   file.directory:
@@ -26,8 +17,16 @@ include:
   - user: root
   - group: root
   - mode: "0644"
-  - contents_pillar: secrets:vault:cloudflare-origin-certificates:namche:certificate
-  - show_changes: false
+  - source: salt://bertrand/origin_cert_namche.pem
+  - require:
+    - file: /etc/nginx/certs
+
+/etc/nginx/certs/cloudflare-origin-ca-rsa-root.pem:
+  file.managed:
+  - user: root
+  - group: root
+  - mode: "0644"
+  - source: salt://nginx/origin_ca_rsa_root.pem
   - require:
     - file: /etc/nginx/certs
 
@@ -49,7 +48,9 @@ nginx-reload:
   cmd.run:
   - name: systemctl try-restart nginx.service
   - onchanges:
-    - file: /etc/nginx/conf.d/ssl.conf.inc
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.crt
+    - file: /etc/nginx/certs/cloudflare-origin-ca-rsa-root.pem
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.key
+    - file: /etc/nginx/conf.d/ssl.conf.inc
+    - file: /etc/nginx/conf.d/redirect-https.conf.inc
     - file: /etc/nginx/conf.d/namche.ai.conf  
