@@ -1,13 +1,13 @@
 infra:
   group.present: []
 
-bertrand-repo-admin-group-membership:
+admin-infra-group-membership:
   user.present:
     - name: admin
     - optional_groups:
       - infra
 
-bertrand-repo-deploy-group-membership:
+deploy-infra-group-membership:
   user.present:
     - name: deploy
     - optional_groups:
@@ -27,7 +27,7 @@ bertrand-repo-deploy-group-membership:
     - require:
       - file: /srv
 
-normalize-bertrand-infra-perms:
+normalize-srv-infra-perms:
   cmd.run:
     - name: |
         chown -R admin:infra /srv/infra
@@ -39,20 +39,20 @@ normalize-bertrand-infra-perms:
     - require:
       - file: /srv/infra
 
-admin-safe-directory-infra:
+admin-safe-directory-srv-infra:
   cmd.run:
     - name: git config --global --add safe.directory /srv/infra
     - runas: admin
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
-      - user: bertrand-repo-admin-group-membership
+      - user: admin-infra-group-membership
       - file: /srv/infra
 
-deploy-safe-directory-infra:
+deploy-safe-directory-srv-infra:
   cmd.run:
     - name: git config --global --add safe.directory /srv/infra
     - runas: deploy
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
-      - user: bertrand-repo-deploy-group-membership
+      - user: deploy-infra-group-membership
       - file: /srv/infra
