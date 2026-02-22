@@ -9,7 +9,7 @@
   - user: root
   - group: root
   - mode: "0644"
-  - source: salt://cloudflare/origin_cert_namche.pem
+  - source: salt://bertrand/origin_cert_namche.pem
   - require:
     - file: /etc/nginx/certs
 
