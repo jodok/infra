@@ -1,18 +1,17 @@
 /etc/namche-api-proxy:
   file.directory:
     - user: root
-    - group: deploy
+    - group: www-data
     - mode: "0750"
 
-# configure manually for now
-#/etc/namche-api-proxy/proxy.env:
-#  file.managed:
-#    - source: salt://apps/namche-api-proxy/proxy.env
-#    - user: root
-#    - group: deploy
-#    - mode: "0640"
-#    - require:
-#      - file: /etc/namche-api-proxy
+/etc/namche-api-proxy/config.yaml:
+  file.managed:
+    - source: salt://apps/namche-api-proxy/config.yaml
+    - user: root
+    - group: www-data
+    - mode: "0640"
+    - require:
+      - file: /etc/namche-api-proxy
 
 /etc/systemd/system/namche-api-proxy.service:
   file.managed:
@@ -32,4 +31,5 @@ namche-api-proxy-service-enabled:
     - name: namche-api-proxy
     - require:
       - file: /etc/systemd/system/namche-api-proxy.service
+      - file: /etc/namche-api-proxy/config.yaml
       - cmd: namche-api-proxy-systemd-daemon-reload
