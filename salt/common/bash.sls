@@ -58,19 +58,12 @@ ncurses-bin:
 
 xterm-ghostty-terminfo:
   cmd.run:
-  - name: |
+  - name: tic -x -o /usr/share/terminfo /usr/local/share/terminfo/xterm-ghostty.src
+  - unless: |
       src=/usr/local/share/terminfo/xterm-ghostty.src
       out=/usr/share/terminfo/78/xterm-ghostty
       alt=/lib/terminfo/78/xterm-ghostty
-
-      if { [ -e "$out" ] && [ "$out" -nt "$src" ]; } || { [ -e "$alt" ] && [ "$alt" -nt "$src" ]; }; then
-        echo "changed=no comment='xterm-ghostty terminfo already up to date'"
-        exit 0
-      fi
-
-      tic -x -o /usr/share/terminfo "$src"
-      echo "changed=yes comment='compiled xterm-ghostty terminfo'"
-  - stateful: True
+      { [ -e "$out" ] && [ "$out" -nt "$src" ]; } || { [ -e "$alt" ] && [ "$alt" -nt "$src" ]; }
   - require:
     - pkg: ncurses-bin
     - file: /usr/local/share/terminfo/xterm-ghostty.src
