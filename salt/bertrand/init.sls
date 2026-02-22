@@ -30,12 +30,12 @@ include:
   - require:
     - file: /etc/nginx/certs
 
-/etc/nginx/certs/cloudflare-origin-ca-bundle.pem:
+/etc/nginx/certs/cloudflare-origin-ca-rsa-root.pem:
   file.managed:
   - user: root
   - group: root
   - mode: "0644"
-  - source: salt://cloudflare/origin_ca_bundle.pem
+  - source: salt://cloudflare/origin_ca_rsa_root.pem
   - require:
     - file: /etc/nginx/certs
 
@@ -59,6 +59,6 @@ nginx-reload:
   - onchanges:
     - file: /etc/nginx/conf.d/ssl.conf.inc
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.crt
-    - file: /etc/nginx/certs/cloudflare-origin-ca-bundle.pem
+    - file: /etc/nginx/certs/cloudflare-origin-ca-rsa-root.pem
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.key
     - file: /etc/nginx/conf.d/namche.ai.conf  
