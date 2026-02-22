@@ -4,6 +4,12 @@
   - name: /usr/bin/openssl dhparam -out /etc/ssl/certs/dhparam.pem 2048
   - unless: test -r /etc/ssl/certs/dhparam.pem
 
+/etc/nginx/default.d:
+  file.directory:
+  - user: root
+  - group: root
+  - dir_mode: "0755"
+
 /etc/nginx/default.d/letsencrypt.conf:
   file.managed:
   - source: salt://letsencrypt/letsencrypt.conf
