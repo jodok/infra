@@ -10,6 +10,14 @@ nginx:
   file.managed:
     - source: salt://nginx/redirect-https.conf
 
+deploy-www-data-group-membership:
+  user.present:
+    - name: deploy
+    - optional_groups:
+      - www-data
+    - require:
+      - user: deploy
+
 nginx-reload-base:
   cmd.run:
     - name: systemctl try-restart nginx

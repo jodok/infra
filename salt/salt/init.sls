@@ -12,6 +12,8 @@ deploy-infra-group-membership:
     - name: deploy
     - optional_groups:
       - infra
+    - require:
+      - user: deploy
 
 /srv:
   file.directory:
