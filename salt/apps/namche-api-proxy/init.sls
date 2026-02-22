@@ -1,16 +1,18 @@
-/apps:
-  file.directory:
-    - user: root
-    - group: root
-    - mode: "0755"
-
-/apps/namche-api-proxy:
+/home/deploy/apps:
   file.directory:
     - user: deploy
     - group: deploy
     - mode: "0755"
     - require:
-      - file: /apps
+      - user: deploy
+
+/home/deploy/apps/namche-api-proxy:
+  file.directory:
+    - user: deploy
+    - group: deploy
+    - mode: "0755"
+    - require:
+      - file: /home/deploy/apps
       - user: deploy
 
 /etc/namche-api-proxy:
@@ -60,7 +62,7 @@ namche-api-proxy-service-enabled:
 namche-api-proxy-service-running:
   service.running:
     - name: namche-api-proxy
-    - onlyif: test -f /apps/namche-api-proxy/index.mjs
+    - onlyif: test -f /home/deploy/apps/namche-api-proxy/index.mjs
     - require:
       - service: namche-api-proxy-service-enabled
       - file: /etc/namche-api-proxy/routes.config.json

@@ -7,9 +7,9 @@ Wants=network-online.target
 Type=simple
 User=deploy
 Group=deploy
-WorkingDirectory=/apps/namche-api-proxy
+WorkingDirectory=/home/deploy/apps/namche-api-proxy
 EnvironmentFile=/etc/namche-api-proxy/webhook-proxy.env
-ExecStart=/usr/bin/node /apps/namche-api-proxy/index.mjs
+ExecStart=/usr/bin/node /home/deploy/apps/namche-api-proxy/index.mjs
 Restart=always
 RestartSec=2
 
