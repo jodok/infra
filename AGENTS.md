@@ -22,6 +22,15 @@ Changes here affect live system configuration.
   - Wait for acknowledgement, then merge to `main`.
   - SSH to `admin@bertrand`, run `git pull`, then `sudo salt-call --local state.apply terse=true`.
 
+### Deployment learnings (bertrand)
+- Remote checkout path is `~/sandbox/infra` for user `admin`.
+- Prefer non-interactive deployment command to avoid hanging on sudo prompts:
+  - `ssh admin@bertrand 'cd ~/sandbox/infra && git pull && sudo -n salt-call --local state.apply terse=true'`
+- If `git pull` is blocked by local modifications, inspect first (`git status`, `git diff`) and only then stash/resolve intentionally before pulling.
+- Repository branch protections require PR-based merges to `main`; do not rely on direct pushes to `main`.
+- The human reviewer/user performs PR approvals; agents should not self-approve unless explicitly asked.
+- When certbot fails during apply, capture and report the exact failing domains/status codes (for DNS/HTTP challenge debugging) instead of masking the error.
+
 ## Terraform-specific instructions
 
 - Treat Terraform changes as production infrastructure changes.
