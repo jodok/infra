@@ -7,7 +7,7 @@ base:
   - hosts.bela
   'bertone.batlogg.com':
   - hosts.bertone
-  'bertone.batlogg.com':
-  - hosts.bertone
+  'bertrand.batlogg.com':
+  - hosts.bertrand
   'janos.a1.nr.gy':
   - hosts.janos
