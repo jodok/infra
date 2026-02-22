@@ -1,20 +1,3 @@
-/home/deploy/apps:
-  file.directory:
-    - user: deploy
-    - group: deploy
-    - mode: "0755"
-    - require:
-      - user: deploy
-
-/home/deploy/apps/namche-api-proxy:
-  file.directory:
-    - user: deploy
-    - group: deploy
-    - mode: "0755"
-    - require:
-      - file: /home/deploy/apps
-      - user: deploy
-
 /etc/namche-api-proxy:
   file.directory:
     - user: root
