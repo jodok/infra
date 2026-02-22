@@ -1,4 +1,5 @@
 include:
+  - bertrand.repo
   - bertrand.volumes
   - docker
   - tailscale
