@@ -29,12 +29,6 @@ deploy:
     - require:
       - file: /home/deploy/.ssh
 
-/etc/sudoers.d:
-  file.directory:
-    - user: root
-    - group: root
-    - mode: "0750"
-
 /etc/sudoers.d/deploy-salt-call:
   file.managed:
     - user: root
