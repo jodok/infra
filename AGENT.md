@@ -16,6 +16,22 @@ Changes here affect live system configuration.
 - Validate syntax before committing:
   - `salt-call --local state.show_sls <state>`
   - `salt-call --local state.apply test=True`
+- For host package changes on `bertrand`, use this workflow:
+  - Add the state include in `salt/bertrand/init.sls` (for nginx: `- nginx`).
+  - Create a branch, push to GitHub, and open a pull request.
+  - Wait for acknowledgement, then merge to `main`.
+  - SSH to `admin@bertrand`, run `git pull`, then `sudo salt-call --local state.apply terse=true`.
+
+## Terraform-specific instructions
+
+- Treat Terraform changes as production infrastructure changes.
+- Always run `terraform fmt` on edited `.tf` files.
+- Validate before commit with `terraform validate`.
+- Generate a plan and review it before apply:
+  - `terraform plan -out=tfplan`
+  - If apply is approved: `terraform apply tfplan`
+- Never apply Terraform changes automatically without explicit user approval.
+- Keep Terraform state/backends unchanged unless explicitly requested.
 
 ### Secrets handling
 - Sensitive pillar values are encrypted with GPG renderer.
