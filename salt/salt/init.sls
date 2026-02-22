@@ -1,20 +1,3 @@
-infra:
-  group.present: []
-
-admin-infra-group-membership:
-  user.present:
-    - name: admin
-    - optional_groups:
-      - infra
-
-deploy-infra-group-membership:
-  user.present:
-    - name: deploy
-    - optional_groups:
-      - infra
-    - require:
-      - user: deploy
-
 /srv:
   file.directory:
     - user: root
@@ -28,6 +11,7 @@ deploy-infra-group-membership:
     - mode: "2775"
     - require:
       - file: /srv
+      - group: infra
 
 normalize-srv-infra-perms:
   cmd.run:
@@ -47,7 +31,7 @@ admin-safe-directory-srv-infra:
     - runas: admin
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
-      - user: admin-infra-group-membership
+      - user: admin
       - file: /srv/infra
 
 deploy-safe-directory-srv-infra:
@@ -56,5 +40,5 @@ deploy-safe-directory-srv-infra:
     - runas: deploy
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
-      - user: deploy-infra-group-membership
+      - user: deploy
       - file: /srv/infra
