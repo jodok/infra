@@ -2,10 +2,10 @@ base:
   '*':
   - common
   'bartok.batlogg.com':
-  - bartok
+  - hosts.bartok
   'bertone.batlogg.com':
-  - bertone
+  - hosts.bertone
   'bertrand.batlogg.com':
-  - bertrand
+  - hosts.bertrand
   'janos.batlogg.com':
-  - janos
+  - hosts.janos

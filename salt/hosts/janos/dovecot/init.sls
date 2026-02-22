@@ -3,19 +3,19 @@ dovecot:
   service.enabled: []
 /etc/dovecot/conf.d/10-auth.conf:
   file.managed:
-  - source: salt://janos/dovecot/10-auth.conf
+  - source: salt://hosts/janos/dovecot/10-auth.conf
   - mode: "0644"
 /etc/dovecot/conf.d/10-mail.conf:
   file.managed:
-  - source: salt://janos/dovecot/10-mail.conf
+  - source: salt://hosts/janos/dovecot/10-mail.conf
   - mode: "0644"
 /etc/dovecot/conf.d/10-master.conf:
   file.managed:
-  - source: salt://janos/dovecot/10-master.conf
+  - source: salt://hosts/janos/dovecot/10-master.conf
   - mode: "0644"
 /etc/dovecot/conf.d/10-ssl.conf:
   file.managed:
-  - source: salt://janos/dovecot/10-ssl.conf
+  - source: salt://hosts/janos/dovecot/10-ssl.conf
   - mode: "0644"
 # caution: this is going to run a long time
 /etc/dovecot/dh.pem:
@@ -28,20 +28,20 @@ dovecot-pigeonhole:
   pkg.installed: []
 /etc/dovecot/conf.d/20-imap.conf:
   file.managed:
-  - source: salt://janos/dovecot/20-imap.conf
+  - source: salt://hosts/janos/dovecot/20-imap.conf
   - mode: "0644"
 /etc/dovecot/conf.d/90-sieve.conf:
   file.managed:
-  - source: salt://janos/dovecot/90-sieve.conf
+  - source: salt://hosts/janos/dovecot/90-sieve.conf
   - mode: "0644"
 
 /usr/lib64/dovecot/sieve/sa-learn-ham.sh:
   file.managed:
-  - source: salt://janos/dovecot/sa-learn-ham.sh
+  - source: salt://hosts/janos/dovecot/sa-learn-ham.sh
   - mode: "0755"
 /usr/lib64/dovecot/sieve/report-ham.sieve:
   file.managed:
-  - source: salt://janos/dovecot/report-ham.sieve
+  - source: salt://hosts/janos/dovecot/report-ham.sieve
   - mode: "0644"
 /bin/sievec /usr/lib64/dovecot/sieve/report-ham.sieve:
   cmd.run:
@@ -50,11 +50,11 @@ dovecot-pigeonhole:
 
 /usr/lib64/dovecot/sieve/sa-learn-spam.sh:
   file.managed:
-  - source: salt://janos/dovecot/sa-learn-spam.sh
+  - source: salt://hosts/janos/dovecot/sa-learn-spam.sh
   - mode: "0755"
 /usr/lib64/dovecot/sieve/report-spam.sieve:
   file.managed:
-  - source: salt://janos/dovecot/report-spam.sieve
+  - source: salt://hosts/janos/dovecot/report-spam.sieve
   - mode: "0644"
 /bin/sievec /usr/lib64/dovecot/sieve/report-spam.sieve:
   cmd.run:

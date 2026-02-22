@@ -11,15 +11,15 @@ exim:
 
 /etc/nginx/conf.d/bertone.batlogg.com.conf:
   file.managed:
-  - source: salt://bertone/bertone.batlogg.com.conf
+  - source: salt://hosts/bertone/bertone.batlogg.com.conf
 
 /etc/nginx/conf.d/nr.gy.conf:
   file.managed:
-  - source: salt://bertone/nr.gy.conf
+  - source: salt://hosts/bertone/nr.gy.conf
 
 /etc/nginx/conf.d/happyswing.at.conf:
   file.managed:
-  - source: salt://bertone/happyswing.at.conf
+  - source: salt://hosts/bertone/happyswing.at.conf
 
 nginx-reload:
   cmd.run:
