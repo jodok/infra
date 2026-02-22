@@ -27,17 +27,10 @@ normalize-srv-infra-perms:
         if git -C /srv/infra rev-parse --is-inside-work-tree >/dev/null 2>&1; then
           git -C /srv/infra config core.sharedRepository group
         fi
-    - unless: |
-        find /srv/infra \( ! -user deploy -o ! -group infra \) -print -quit | grep -q . && exit 1
-        find /srv/infra -type d \( ! -perm -2000 -o ! -perm -0770 \) -print -quit | grep -q . && exit 1
-        find /srv/infra -type f ! -perm -0060 -print -quit | grep -q . && exit 1
-        find /srv/infra -type f -perm -u=x ! -perm -g=x -print -quit | grep -q . && exit 1
-        if git -C /srv/infra rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-          [ "$(git -C /srv/infra config --get core.sharedRepository || true)" = "group" ] || exit 1
-        fi
-        exit 0
     - onlyif: test -d /srv/infra
     - require:
+      - file: /srv/infra
+    - onchanges:
       - file: /srv/infra
 
 deploy-safe-directory-srv-infra:
