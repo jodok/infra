@@ -24,8 +24,10 @@ normalize-srv-infra-perms:
         chown -R deploy:infra /srv/infra
         chmod -R g+rwX /srv/infra
         find /srv/infra -type d -exec chmod g+s {} +
-        git -C /srv/infra config core.sharedRepository group
-    - onlyif: test -d /srv/infra/.git
+        if git -C /srv/infra rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+          git -C /srv/infra config core.sharedRepository group
+        fi
+    - onlyif: test -d /srv/infra
     - require:
       - file: /srv/infra
 
