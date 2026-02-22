@@ -4,14 +4,15 @@
     - group: deploy
     - mode: "0750"
 
-/etc/namche-api-proxy/proxy.env:
-  file.managed:
-    - source: salt://apps/namche-api-proxy/proxy.env
-    - user: root
-    - group: deploy
-    - mode: "0640"
-    - require:
-      - file: /etc/namche-api-proxy
+# configure manually for now
+#/etc/namche-api-proxy/proxy.env:
+#  file.managed:
+#    - source: salt://apps/namche-api-proxy/proxy.env
+#    - user: root
+#    - group: deploy
+#    - mode: "0640"
+#    - require:
+#      - file: /etc/namche-api-proxy
 
 /etc/systemd/system/namche-api-proxy.service:
   file.managed:
