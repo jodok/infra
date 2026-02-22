@@ -17,6 +17,12 @@ letsencrypt:
   - user: root
   - group: letsencrypt
 
+/var/lib/letsencrypt/:
+  file.directory:
+  - dir_mode: "0750"
+  - user: root
+  - group: letsencrypt
+  
 {%- if pillar['letsencrypt']['mode'] == 'standalone' %}
   {%- set letsencrypt_mode = '--standalone' %}
 {%- else %}
@@ -47,5 +53,5 @@ letsencrypt:
   - source: salt://letsencrypt/certbot.sysconfig.j2
   - template: jinja
 
-certbot-renew.timer:
+certbot.timer:
   service.enabled: []
