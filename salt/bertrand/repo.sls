@@ -15,6 +15,13 @@ bertrand-repo-tashi-group-membership:
       - infra
     - append: True
 
+bertrand-repo-deploy-group-membership:
+  user.present:
+    - name: deploy
+    - groups:
+      - infra
+    - append: True
+
 /srv:
   file.directory:
     - user: root
@@ -57,4 +64,13 @@ tashi-safe-directory-infra:
     - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
     - require:
       - user: bertrand-repo-tashi-group-membership
+      - file: /srv/infra
+
+deploy-safe-directory-infra:
+  cmd.run:
+    - name: git config --global --add safe.directory /srv/infra
+    - runas: deploy
+    - unless: git config --global --get-all safe.directory | grep -Fx '/srv/infra'
+    - require:
+      - user: bertrand-repo-deploy-group-membership
       - file: /srv/infra
