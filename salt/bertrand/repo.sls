@@ -4,23 +4,20 @@ infra:
 bertrand-repo-admin-group-membership:
   user.present:
     - name: admin
-    - groups:
+    - optional_groups:
       - infra
-    - append: True
 
 bertrand-repo-tashi-group-membership:
   user.present:
     - name: tashi
-    - groups:
+    - optional_groups:
       - infra
-    - append: True
 
 bertrand-repo-deploy-group-membership:
   user.present:
     - name: deploy
-    - groups:
+    - optional_groups:
       - infra
-    - append: True
 
 /srv:
   file.directory:
