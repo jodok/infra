@@ -18,7 +18,7 @@ Changes here affect live system configuration.
   - `salt-call --local state.apply test=True`
 - Use PR-based merges to `main`; do not push directly to protected branches.
 - Deploy from the host checkout (`/srv/infra`) as `deploy` with non-interactive sudo:
-  - `ssh deploy@bertrand 'cd /srv/infra && git pull && sudo -n salt-call --local state.apply terse=true'`
+  - `ssh deploy@bertrand.batlogg.com 'cd /srv/infra && git pull && sudo -n /usr/bin/salt-call --local state.apply terse=true'`
 - After deployment, report the Salt summary (`Succeeded`/`Failed`) and key changed states.
 
 ### Salt design principles
