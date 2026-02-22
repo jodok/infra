@@ -2,8 +2,6 @@ letsencrypt:
   mode: nginx
   certs:
     namche.ai:
-    - namche.ai
-    - www.namche.ai
     - api.namche.ai
     - nima.namche.ai
     - pema.namche.ai
