@@ -12,15 +12,15 @@
 
 /etc/nginx/default.d/redirect-https.conf:
   file.managed:
-  - source: salt://cloudflare/redirect-https.conf
+  - source: salt://nginx/redirect-https.conf
 
 /etc/nginx/conf.d/ssl.conf.inc:
   file.managed:
-  - source: salt://cloudflare/ssl.conf.inc
+  - source: salt://nginx/ssl.conf.inc
 
 /etc/nginx/conf.d/redirect-https.conf.inc:
   file.managed:
-  - source: salt://cloudflare/redirect-https.conf
+  - source: salt://nginx/redirect-https.conf
 
 nginx-reload-cloudflare:
   cmd.run:

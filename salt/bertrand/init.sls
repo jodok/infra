@@ -26,7 +26,7 @@ include:
   - user: root
   - group: root
   - mode: "0644"
-  - source: salt://cloudflare/origin_ca_rsa_root.pem
+  - source: salt://nginx/origin_ca_rsa_root.pem
   - require:
     - file: /etc/nginx/certs
 
