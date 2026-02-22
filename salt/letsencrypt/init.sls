@@ -1,6 +1,12 @@
 certbot:
   pkg.installed: []
 
+{%- if grains['os_family'] == 'RedHat' %}
+  {%- set certbot_config_path = '/etc/sysconfig/certbot' %}
+{%- else %}
+  {%- set certbot_config_path = '/etc/default/certbot' %}
+{%- endif %}
+
 letsencrypt:
   group.present:
   - system: true
@@ -48,7 +54,7 @@ letsencrypt:
   - group: letsencrypt
 {%- endfor %}
 
-/etc/sysconfig/certbot:
+{{ certbot_config_path }}:
   file.managed:
   - source: salt://letsencrypt/certbot.sysconfig.j2
   - template: jinja
