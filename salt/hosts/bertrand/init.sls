@@ -1,4 +1,5 @@
 include:
+  - apps.namche-api-proxy
   - hosts.bertrand.deploy
   - hosts.bertrand.volumes
   - docker
@@ -6,6 +7,9 @@ include:
   - openclaw
   - nginx
   - nginx.cloudflare
+
+nodejs:
+  - pkg.installed: []
 
 /etc/nginx/certs/namche.ai.cloudflare-origin.crt:
   file.managed:
