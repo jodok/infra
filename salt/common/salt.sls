@@ -13,30 +13,22 @@ salt-minion:
     - user: deploy
     - group: infra
     - mode: "2775"
+    - dir_mode: "2775"
+    - file_mode: "0664"
+    - recurse:
+      - user
+      - group
+      - mode
     - require:
       - file: /srv
       - user: deploy
       - group: infra
 
-normalize-srv-infra-perms:
+srv-infra-shared-repository-group:
   cmd.run:
-    - name: |
-        chown -R deploy:infra /srv/infra
-        chmod -R g+rwX /srv/infra
-        find /srv/infra -type d -exec chmod g+s {} +
-        if git -C /srv/infra rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-          git -C /srv/infra config core.sharedRepository group
-        fi
-    - unless: |
-        find /srv/infra \( ! -user deploy -o ! -group infra \) -print -quit | grep -q . && exit 1
-        find /srv/infra -type d \( ! -perm -2000 -o ! -perm -0770 \) -print -quit | grep -q . && exit 1
-        find /srv/infra -type f ! -perm -0060 -print -quit | grep -q . && exit 1
-        find /srv/infra -type f -perm -u=x ! -perm -g=x -print -quit | grep -q . && exit 1
-        if git -C /srv/infra rev-parse --is-inside-work-tree >/dev/null 2>&1; then
-          [ "$(git -C /srv/infra config --get core.sharedRepository || true)" = "group" ] || exit 1
-        fi
-        exit 0
-    - onlyif: test -d /srv/infra
+    - name: git -C /srv/infra config core.sharedRepository group
+    - onlyif: git -C /srv/infra rev-parse --is-inside-work-tree >/dev/null 2>&1
+    - unless: test "$(git -C /srv/infra config --get core.sharedRepository || true)" = "group"
     - require:
       - file: /srv/infra
 
