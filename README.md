@@ -2,6 +2,10 @@
 
 This repository contains Salt states and pillar data for managing servers on Hetzner infrastructure.
 
+Layout note:
+- Reusable modules live under `salt/<module>/`
+- Host-specific states live under `salt/hosts/<hostname>/`
+
 ## Overview
 
 - **Platform**: Hetzner Cloud
