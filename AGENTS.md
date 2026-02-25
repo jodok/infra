@@ -1,4 +1,4 @@
-# Agent Instructions
+# Bot Instructions
 
 ## SaltStack-specific instructions (this repo is executed on servers)
 
@@ -48,15 +48,15 @@ Before proposing or applying a change, explicitly answer:
 - What is the blast radius if this is wrong?
 - How can it be tested safely (`test=True`) before apply?
 
-## General guidelines for all agents
+## General guidelines for all bots
 
-- Delete unused or obsolete files when your changes make them irrelevant (refactors, feature removals, etc.), and revert files only when the change is yours or explicitly requested. If a git operation leaves you unsure about other agents' in-flight work, stop and coordinate instead of deleting.
-- **Before attempting to delete a file to resolve a local type/lint failure, stop and ask the user.** Other agents are often editing adjacent files; deleting their work to silence an error is never acceptable without explicit approval.
+- Delete unused or obsolete files when your changes make them irrelevant (refactors, feature removals, etc.), and revert files only when the change is yours or explicitly requested. If a git operation leaves you unsure about other bots' in-flight work, stop and coordinate instead of deleting.
+- **Before attempting to delete a file to resolve a local type/lint failure, stop and ask the user.** Other bots are often editing adjacent files; deleting their work to silence an error is never acceptable without explicit approval.
 - NEVER edit `.env` or any environment variable files—only the user may change them.
-- Coordinate with other agents before removing their in-progress edits—don't revert or delete work you didn't author unless everyone agrees.
+- Coordinate with other bots before removing their in-progress edits—don't revert or delete work you didn't author unless everyone agrees.
 - Moving/renaming and restoring files is allowed.
 - ABSOLUTELY NEVER run destructive git operations (e.g., `git reset --hard`, `rm`, `git checkout`/`git restore` to an older commit) unless the user gives an explicit, written instruction in this conversation. Treat these commands as catastrophic; if you are even slightly unsure, stop and ask before touching them. *(When working within Cursor or Codex Web, these git limitations do not apply; use the tooling's capabilities as needed.)*
-- Never use `git restore` (or similar commands) to revert files you didn't author—coordinate with other agents instead so their in-progress work stays intact.
+- Never use `git restore` (or similar commands) to revert files you didn't author—coordinate with other bots instead so their in-progress work stays intact.
 - Always double-check git status before any commit
 - Keep commits atomic: commit only the files you touched and list each path explicitly. For tracked files run `git commit -m "<scoped message>" -- path/to/file1 path/to/file2`. For brand-new files, use the one-liner `git restore --staged :/ && git add "path/to/file1" "path/to/file2" && git commit -m "<scoped message>" -- path/to/file1 path/to/file2`.
 - Quote any git paths containing brackets or parentheses (e.g., `src/app/[candidate]/**`) when staging or committing so the shell does not treat them as globs or subshells.
