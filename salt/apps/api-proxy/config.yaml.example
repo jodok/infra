@@ -1,0 +1,24 @@
+listen:
+  host: 127.0.0.1
+  port: 3000
+
+logLevel: info
+
+WEBFORM_ALLOWED_ORIGINS:
+  - https://tashi.namche.ai
+
+agents:
+  tashi:
+    url: https://tashi.silverside-mermaid.ts.net
+    openclawHooksToken: Bearer <OPENCLAW_HOOKS_TOKEN_TASHI>
+
+apps:
+  krisp:
+    incomingAuthorization: Bearer <KRISP_AUTHORIZATION>
+    targetAgent: tashi
+
+  # gmail is optional — omit to disable the route
+  gmail:
+    oidcEmail: <SERVICE_ACCOUNT>@<PROJECT>.iam.gserviceaccount.com
+    targetAgent: tashi
+    forwardUrl: https://tashi.silverside-mermaid.ts.net/gmail-pubsub?token=<GOG_SERVE_TOKEN>
