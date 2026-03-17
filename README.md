@@ -47,6 +47,11 @@ The fastest way to bootstrap a new server on Hetzner.
 - Configures Salt minion for local mode
 - Sets up basic system configuration
 
+**Ownership model:**
+- `admin` is the bootstrap and interactive admin account.
+- `deploy` owns the shared `/srv/infra` checkout used for Salt runs and GitHub Actions deploys.
+- `infra` is the shared group for the `/srv/infra` repository.
+
 **Next steps:** Proceed to [GPG Key Setup](#gpg-key-setup)
 
 ### Option B: Manual Bootstrap
@@ -96,13 +101,21 @@ decrypt_pillar:
   - "secrets:vault"
 ```
 
-**4. Clone This Repository**
-
-as the `admin` user, clone the repository:
+**4. Create the Deploy User and Shared Repository Group**
 
 ```bash
-sudo install -d -o admin -g admin /srv/infra
-sudo -u admin git clone https://github.com/jodok/infra.git /srv/infra
+sudo groupadd -f infra
+id -u deploy >/dev/null 2>&1 || sudo useradd -m -s /bin/bash -G infra deploy
+sudo usermod -a -G infra deploy
+```
+
+**5. Clone This Repository**
+
+as the `deploy` user, clone the repository into the shared checkout path:
+
+```bash
+sudo install -d -o deploy -g infra -m 2775 /srv/infra
+sudo -u deploy git clone https://github.com/jodok/infra.git /srv/infra
 ```
 
 **Next steps:** Proceed to [GPG Key Setup](#gpg-key-setup)
@@ -113,7 +126,7 @@ sudo -u admin git clone https://github.com/jodok/infra.git /srv/infra
 
 Before running Salt, GPG encryption must be configured for encrypted pillar data.
 
-> **Important:** You must be logged in as root for initial setup. After the first Salt run, root login will be disabled and you must use the `admin` user.
+> **Important:** You must be logged in as root for initial setup. After the first Salt run, root login will be disabled. Use `admin` for interactive administration and `deploy` for non-interactive `/srv/infra` deploy runs.
 
 ### 1. Export GPG Keys (On Your Local Machine)
 
