@@ -4,6 +4,7 @@
 # install salt-minion from official SaltStack repository
 # clone infra repository if not already present
 # preserve an existing FQDN, otherwise append the batlogg.com domain
+# bootstrap with admin as the login user and deploy as the /srv/infra owner
 
 users:
   - name: admin
@@ -59,9 +60,13 @@ write_files:
       apt update
       apt install -y salt-minion
 
-      install -d -o admin -g admin /srv/infra
+      getent group infra >/dev/null || groupadd infra
+      id -u deploy >/dev/null 2>&1 || useradd -m -s /bin/bash -G infra deploy
+      usermod -a -G infra deploy
+
+      install -d -o deploy -g infra /srv/infra
       if [ ! -d /srv/infra/.git ]; then
-        su - admin -c 'git clone https://github.com/jodok/infra /srv/infra'
+        su - deploy -c 'git clone https://github.com/jodok/infra /srv/infra'
       fi
 
       echo "$(hostname -f)" > /etc/salt/minion_id
