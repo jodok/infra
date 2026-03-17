@@ -3,16 +3,17 @@
 # update and upgrade packages on first boot, install packages required for bootstrapping
 # install salt-minion from official SaltStack repository
 # clone infra repository if not already present
-# set FQDN based on existing hostname and batlogg.com domain
+# preserve an existing FQDN, otherwise append the batlogg.com domain
 
 users:
   - name: admin
-    groups: admin, sudo
+    primary_group: admin
+    groups: sudo
     shell: /bin/bash
     ssh_authorized_keys:
       - ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCklkTcGXm7RSadXDulh3dR0QLA0KymDzRhEhvvnyjRnzdEWmfgPfN05C9qDQZXzoL64NY8BuTVFMjLfWYC9+tesWMemJYCDV9ATwhFRZxru20+eBwFn9wLCLv7sozy72jIrWROvjoP5nG8D2/2Yzv07t/qPC7BDDOSp3gYJcyLLeIIqBfrZ6pmkM18V6rNDeRTz11EN5+mLRr6+AwHcBE8iv5+Ea1baMFTbvLx9NAPA3+IoPYSBiwfTCbFQKxkXMc7Fg31NG+iHrtj3dVsfGOq46ecla/FqdWudMlwScwV34MncZzNzVAxgN6TMUJtOIRl/OVox5oD2dFwVprjKHWH jodok@batlogg.com
 
-package_reboot_if_required: true
+package_reboot_if_required: false
 package_update: true
 package_upgrade: true
 
@@ -34,14 +35,33 @@ write_files:
           - /srv/infra/pillar
       decrypt_pillar:
         - "secrets:vault"
+  - path: /var/lib/cloud/scripts/per-instance/bootstrap-infra.sh
+    permissions: "0755"
+    content: |
+      #!/usr/bin/env bash
+      set -euo pipefail
 
-runcmd:
-  - [bash, -lc, "short_name=$(hostname -s); fqdn=\"${short_name}.batlogg.com\"; hostnamectl set-hostname \"${fqdn}\""]
-  - [bash, -lc, "mkdir -p /etc/apt/keyrings"]
-  - [bash, -lc, "curl -fsSL https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public | tee /etc/apt/keyrings/salt-archive-keyring.pgp >/dev/null"]
-  - [bash, -lc, "curl -fsSL https://github.com/saltstack/salt-install-guide/releases/latest/download/salt.sources | tee /etc/apt/sources.list.d/salt.sources >/dev/null"]
-  - [bash, -lc, "apt update"]
-  - [bash, -lc, "apt install -y salt-minion"]
-  - [bash, -lc, "install -d -o admin -g admin /srv/infra"]
-  - [bash, -lc, "if [ ! -d /srv/infra/.git ]; then su - admin -c 'git clone https://github.com/jodok/infra /srv/infra'; fi"]
-  - [bash, -lc, "echo \"$(hostname -f)\" > /etc/salt/minion_id"]
+      current_hostname=$(hostname)
+      if [[ "$current_hostname" == *.* ]]; then
+        fqdn="$current_hostname"
+      else
+        short_name=$(hostname -s)
+        fqdn="${short_name}.batlogg.com"
+      fi
+      hostnamectl set-hostname "$fqdn"
+
+      mkdir -p /etc/apt/keyrings
+      curl -fsSL https://packages.broadcom.com/artifactory/api/security/keypair/SaltProjectKey/public \
+        | tee /etc/apt/keyrings/salt-archive-keyring.pgp >/dev/null
+      curl -fsSL https://github.com/saltstack/salt-install-guide/releases/latest/download/salt.sources \
+        | tee /etc/apt/sources.list.d/salt.sources >/dev/null
+
+      apt update
+      apt install -y salt-minion
+
+      install -d -o admin -g admin /srv/infra
+      if [ ! -d /srv/infra/.git ]; then
+        su - admin -c 'git clone https://github.com/jodok/infra /srv/infra'
+      fi
+
+      echo "$(hostname -f)" > /etc/salt/minion_id
