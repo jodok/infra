@@ -8,6 +8,7 @@
 /etc/apt/keyrings/nodesource.asc:
   file.managed:
     - source: https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key
+    - source_hash: sha256=b42e0321dabdc24e892115da705cf061167eac12a317f23d329862d0aa0a271d
     - require:
       - file: /etc/apt/keyrings
 
