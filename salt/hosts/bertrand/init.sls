@@ -4,15 +4,10 @@ include:
   - hosts.bertrand.volumes
   - docker
   - tailscale
+  - nodejs
   - openclaw
   - nginx
   - nginx.cloudflare
-
-nodejs:
-  pkg.installed: []
-
-npm:
-  pkg.installed: []
 
 /etc/nginx/certs/namche.ai.cloudflare-origin.crt:
   file.managed:
