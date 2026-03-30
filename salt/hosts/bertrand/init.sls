@@ -5,6 +5,7 @@ include:
   - docker
   - tailscale
   - nodejs
+  - supabase
   - openclaw
   - nginx
   - nginx.cloudflare
