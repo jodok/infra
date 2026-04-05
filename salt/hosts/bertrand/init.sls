@@ -1,5 +1,6 @@
 include:
   - apps.api-proxy
+  - apps.searxng
   - hosts.bertrand.deploy
   - hosts.bertrand.volumes
   - docker

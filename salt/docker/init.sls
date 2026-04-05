@@ -36,5 +36,6 @@ docker:
   group.present:
     - addusers:
       - admin
+      - deploy
 
   {%- endif %}
