@@ -57,10 +57,12 @@ searxng-service-restart:
   cmd.run:
     - name: systemctl restart searxng.service
     - onchanges:
+      - group: docker
       - file: /home/deploy/apps/searxng/docker-compose.yml
       - file: /home/deploy/apps/searxng/.env
       - file: /etc/systemd/system/searxng.service
     - require:
       - pkg: docker
+      - group: docker
       - service: searxng-service-enabled
       - cmd: searxng-systemd-daemon-reload
