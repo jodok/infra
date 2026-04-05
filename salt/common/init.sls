@@ -2,6 +2,7 @@ include:
   - common.admin
   - common.bash
   - common.infra
+  - common.sysctl
   - common.sudoers
   - common.sshd
   - common.fail2ban
