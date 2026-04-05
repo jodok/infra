@@ -31,6 +31,7 @@ Changes here affect live system configuration.
 - Keep includes explicit: host init states should compose reusable modules plus host-local files.
 - Minimize Jinja; prefer clear declarative states unless templating is truly needed.
 - Keep states idempotent and deterministic.
+- Do not use `service.running` in Salt states in this repo; prefer `service.enabled` plus explicit `cmd.run` restarts/reloads on file changes.
 
 ### Boundaries and ownership
 - Host-specific data must not leak into generic modules.
