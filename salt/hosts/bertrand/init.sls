@@ -9,6 +9,10 @@ include:
   - nginx
   - nginx.cloudflare
 
+vm.overcommit_memory:
+  sysctl.present:
+    - value: 1
+
 /etc/nginx/certs/namche.ai.cloudflare-origin.crt:
   file.managed:
   - user: root
