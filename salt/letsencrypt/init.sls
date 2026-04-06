@@ -51,7 +51,8 @@ letsencrypt:
   - user: root
   - group: root
   - mode: "0600"
-  - contents_pillar: {{ pillar['letsencrypt']['dns_cloudflare_credentials_pillar'] }}
+  - contents: |
+      dns_cloudflare_api_token = {{ salt['pillar.get'](pillar['letsencrypt']['dns_cloudflare_credentials_pillar']) }}
   - show_changes: false
 {%- endif %}
 
