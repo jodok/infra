@@ -12,7 +12,7 @@ Environment=PATH=/home/deploy/.local/bin:/usr/local/bin:/usr/bin:/bin
 EnvironmentFile=/home/deploy/apps/openclaw-claude-bridge/.env
 ExecStart=/usr/bin/node src/index.js
 KillMode=process
-TimeoutStopSec=180
+TimeoutStopSec=30
 Restart=always
 RestartSec=5
 StandardOutput=journal

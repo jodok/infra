@@ -9,7 +9,7 @@
 
 openclaw-claude-bridge-repo:
   cmd.run:
-    - name: git clone https://github.com/shinglokto/openclaw-claude-bridge.git /home/deploy/apps/openclaw-claude-bridge && git -C /home/deploy/apps/openclaw-claude-bridge checkout c828f45bfc7a8690487a1b06d0dec591b9857fcf
+    - name: git clone https://github.com/shinglokto/openclaw-claude-bridge.git /home/deploy/apps/openclaw-claude-bridge
     - runas: deploy
     - creates: /home/deploy/apps/openclaw-claude-bridge/.git
     - require:
@@ -24,7 +24,7 @@ openclaw-claude-bridge-repo:
     - mode: "0600"
     - show_changes: false
     - require:
-      - git: openclaw-claude-bridge-repo
+      - cmd: openclaw-claude-bridge-repo
 
 openclaw-claude-bridge-install:
   cmd.run:
@@ -37,7 +37,7 @@ openclaw-claude-bridge-install:
         PATH: /home/deploy/.local/bin:/usr/local/bin:/usr/bin:/bin
     - require:
       - pkg: nodejs
-      - git: openclaw-claude-bridge-repo
+      - cmd: openclaw-claude-bridge-repo
 
 /etc/systemd/system/openclaw-claude-bridge.service:
   file.managed:
