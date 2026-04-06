@@ -17,6 +17,15 @@ services:
       retries: 5
       start_period: 60s
 
+  migrate:
+    container_name: honcho-migrate
+    image: ghcr.io/plastic-labs/honcho:${HONCHO_VERSION:-latest}
+    env_file: ./.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: ["alembic", "upgrade", "head"]
+    restart: "no"
+
   deriver:
     container_name: honcho-deriver
     image: ghcr.io/plastic-labs/honcho:${HONCHO_VERSION:-latest}
@@ -28,3 +37,5 @@ services:
     depends_on:
       api:
         condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
