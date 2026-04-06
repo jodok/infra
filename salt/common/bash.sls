@@ -12,8 +12,8 @@
         prompt_command() {
           local exit="$?"
 
-          # hostname (red)
-          local host="\[\033[31m\]\h\[\033[0m\] "
+          # user@host (yellow user, red host)
+          local identity="\[\033[33m\]\u@\[\033[31m\]\h\[\033[0m\] "
 
           # arrow (green/red based on exit)
           if [ "$exit" -eq 0 ]; then
@@ -32,7 +32,7 @@
             git_branch="git:($git_branch) "
           fi
 
-          PS1="${host}${arrow}${cwd}${git_branch}"
+          PS1="${identity}${arrow}${cwd}${git_branch}"
         }
 
         PROMPT_COMMAND=prompt_command
