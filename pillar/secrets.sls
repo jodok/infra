@@ -158,7 +158,7 @@ secrets:
           Oa87InXZzP+mzN7p2OYwwPaqYsyIYnoaVNpro03cuDqv
           =PzIB
           -----END PGP MESSAGE-----
-    hono:
+    honcho:
       openai_api_key: |
         -----BEGIN PGP MESSAGE-----
         Comment: GPGTools - http://gpgtools.org
@@ -242,7 +242,6 @@ secrets:
         9B0Qt/9zJ/bKUr/AM3s9+oZQnlzcZAOkkCoisgZg
         =Ftba
         -----END PGP MESSAGE-----
-    honcho:
       db_password: |
         -----BEGIN PGP MESSAGE-----
         Comment: GPGTools - http://gpgtools.org
