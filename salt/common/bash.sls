@@ -37,6 +37,39 @@
 
         PROMPT_COMMAND=prompt_command
 
+/etc/zsh/zshrc-prompt:
+  file.blockreplace:
+    - name: /etc/zsh/zshrc
+    - marker_start: "# START managed by salt: common.zsh prompt"
+    - marker_end: "# END managed by salt: common.zsh prompt"
+    - append_if_not_found: True
+    - content: |
+        parse_git_branch() {
+          git branch --show-current 2>/dev/null
+        }
+
+        setopt prompt_subst
+
+        precmd() {
+          local exit_status="$?"
+          local arrow
+          local git_branch
+
+          if [ "$exit_status" -eq 0 ]; then
+            arrow="%B%F{green}➜%f%b"
+          else
+            arrow="%B%F{red}➜%f%b"
+          fi
+
+          git_branch="$(parse_git_branch)"
+          if [ -n "$git_branch" ]; then
+            git_branch=" git:(${git_branch})"
+          fi
+
+          PROMPT="%F{yellow}%n@%m%f ${arrow}  %F{cyan}%1~%f${git_branch} "
+          RPROMPT=""
+        }
+
 # Ghostty
 ncurses-bin:
   pkg.installed: []
