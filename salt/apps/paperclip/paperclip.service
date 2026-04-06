@@ -8,6 +8,7 @@ Type=simple
 User=deploy
 Group=deploy
 WorkingDirectory=/home/deploy/apps/paperclip
+Environment=PATH=/home/deploy/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 EnvironmentFile=/home/deploy/apps/paperclip/.env
 ExecStart=/usr/bin/node --import ./server/node_modules/tsx/dist/loader.mjs server/dist/index.js
 Restart=always
