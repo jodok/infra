@@ -1,0 +1,19 @@
+[Unit]
+Description=Paperclip (Docker Compose)
+After=network-online.target docker.service postgresql.service
+Wants=network-online.target
+Requires=docker.service
+
+[Service]
+Type=oneshot
+User=deploy
+Group=deploy
+WorkingDirectory=/home/deploy/apps/paperclip/docker
+RemainAfterExit=yes
+ExecStart=/usr/bin/docker compose -f docker-compose.custom.yml up -d --build
+ExecStop=/usr/bin/docker compose -f docker-compose.custom.yml down
+ExecReload=/usr/bin/docker compose -f docker-compose.custom.yml up -d --build
+TimeoutStartSec=0
+
+[Install]
+WantedBy=multi-user.target
