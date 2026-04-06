@@ -3,7 +3,7 @@ name: paperclip
 services:
   server:
     build:
-      context: /home/deploy/apps/paperclip
+      context: ..
       dockerfile: Dockerfile
     container_name: paperclip-server
     restart: always
@@ -12,5 +12,3 @@ services:
     env_file: ./.env
     extra_hosts:
       - "host.docker.internal:host-gateway"
-    volumes:
-      - /srv/paperclip:/paperclip

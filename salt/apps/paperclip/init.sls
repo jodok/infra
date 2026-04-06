@@ -6,22 +6,14 @@ paperclip-repo:
     - require:
       - user: deploy
 
-/home/deploy/apps/paperclip/docker:
-  file.directory:
-    - user: deploy
-    - group: deploy
-    - mode: "0755"
-    - require:
-      - git: paperclip-repo
-
-/home/deploy/apps/paperclip/docker/docker-compose.yml:
+/home/deploy/apps/paperclip/docker/docker-compose.custom.yml:
   file.managed:
-    - source: salt://apps/paperclip/docker-compose.yml
+    - source: salt://apps/paperclip/docker-compose.custom.yml
     - user: deploy
     - group: deploy
     - mode: "0644"
     - require:
-      - file: /home/deploy/apps/paperclip/docker
+      - git: paperclip-repo
 
 /home/deploy/apps/paperclip/docker/.env:
   file.managed:
@@ -32,14 +24,7 @@ paperclip-repo:
     - mode: "0600"
     - show_changes: false
     - require:
-      - file: /home/deploy/apps/paperclip/docker
-
-/srv/paperclip:
-  file.directory:
-    - user: deploy
-    - group: deploy
-    - mode: "0755"
-    - makedirs: True
+      - git: paperclip-repo
 
 /etc/systemd/system/paperclip.service:
   file.managed:
@@ -58,7 +43,7 @@ paperclip-service-enabled:
   service.enabled:
     - name: paperclip
     - require:
-      - file: /home/deploy/apps/paperclip/docker/docker-compose.yml
+      - file: /home/deploy/apps/paperclip/docker/docker-compose.custom.yml
       - file: /home/deploy/apps/paperclip/docker/.env
       - file: /etc/systemd/system/paperclip.service
       - cmd: paperclip-systemd-daemon-reload
@@ -67,7 +52,7 @@ paperclip-service-restart:
   cmd.run:
     - name: systemctl restart paperclip.service
     - onchanges:
-      - file: /home/deploy/apps/paperclip/docker/docker-compose.yml
+      - file: /home/deploy/apps/paperclip/docker/docker-compose.custom.yml
       - file: /home/deploy/apps/paperclip/docker/.env
       - file: /etc/systemd/system/paperclip.service
     - require:
@@ -75,5 +60,4 @@ paperclip-service-restart:
       - service: paperclip-service-enabled
       - cmd: paperclip-systemd-daemon-reload
       - cmd: postgres-restart
-      - file: /srv/paperclip
       - postgres_database: paperclip-db

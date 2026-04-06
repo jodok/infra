@@ -58,6 +58,12 @@ include:
   - require:
     - cmd: /etc/letsencrypt/live/khumbu.namche.ai/fullchain.pem
 
+/etc/nginx/conf.d/paperclip.namche.ai.conf:
+  file.managed:
+  - source: salt://hosts/bertrand/paperclip.namche.ai.conf
+  - require:
+    - file: /etc/nginx/certs/namche.ai.cloudflare-origin.crt
+
 nginx-reload:
   cmd.run:
   - name: systemctl try-restart nginx.service
@@ -68,3 +74,4 @@ nginx-reload:
     - file: /etc/nginx/conf.d/khumbu.namche.ai.conf
     - file: /etc/nginx/conf.d/claude-bridge.khumbu.namche.ai.conf
     - file: /etc/nginx/conf.d/honcho.khumbu.namche.ai.conf
+    - file: /etc/nginx/conf.d/paperclip.namche.ai.conf
