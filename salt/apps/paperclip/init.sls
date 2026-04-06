@@ -6,16 +6,25 @@ paperclip-repo:
     - require:
       - user: deploy
 
-/home/deploy/apps/paperclip/docker/docker-compose.custom.yml:
-  file.managed:
-    - source: salt://apps/paperclip/docker-compose.custom.yml
-    - user: deploy
-    - group: deploy
-    - mode: "0644"
+paperclip-pnpm-install:
+  cmd.run:
+    - name: pnpm install --frozen-lockfile
+    - cwd: /home/deploy/apps/paperclip
+    - runas: deploy
     - require:
       - git: paperclip-repo
+    - unless: test -d /home/deploy/apps/paperclip/node_modules
 
-/home/deploy/apps/paperclip/docker/.env:
+paperclip-build:
+  cmd.run:
+    - name: pnpm -r build
+    - cwd: /home/deploy/apps/paperclip
+    - runas: deploy
+    - require:
+      - cmd: paperclip-pnpm-install
+    - unless: test -d /home/deploy/apps/paperclip/server/dist
+
+/home/deploy/apps/paperclip/.env:
   file.managed:
     - source: salt://apps/paperclip/env.j2
     - template: jinja
@@ -43,8 +52,8 @@ paperclip-service-enabled:
   service.enabled:
     - name: paperclip
     - require:
-      - file: /home/deploy/apps/paperclip/docker/docker-compose.custom.yml
-      - file: /home/deploy/apps/paperclip/docker/.env
+      - cmd: paperclip-build
+      - file: /home/deploy/apps/paperclip/.env
       - file: /etc/systemd/system/paperclip.service
       - cmd: paperclip-systemd-daemon-reload
 
@@ -52,12 +61,9 @@ paperclip-service-restart:
   cmd.run:
     - name: systemctl restart paperclip.service
     - onchanges:
-      - file: /home/deploy/apps/paperclip/docker/docker-compose.custom.yml
-      - file: /home/deploy/apps/paperclip/docker/.env
+      - file: /home/deploy/apps/paperclip/.env
       - file: /etc/systemd/system/paperclip.service
     - require:
-      - pkg: docker
       - service: paperclip-service-enabled
       - cmd: paperclip-systemd-daemon-reload
-      - cmd: postgres-restart
       - postgres_database: paperclip-db
