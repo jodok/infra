@@ -1,0 +1,22 @@
+[Unit]
+Description=OpenClaw Claude Bridge
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=deploy
+Group=deploy
+WorkingDirectory=/home/deploy/apps/openclaw-claude-bridge
+Environment=PATH=/home/deploy/.local/bin:/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=/home/deploy/apps/openclaw-claude-bridge/.env
+ExecStart=/usr/bin/node src/index.js
+KillMode=process
+TimeoutStopSec=180
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
