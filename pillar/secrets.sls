@@ -136,3 +136,25 @@ secrets:
           0iubaat9dbgVj2xLS/LAjAk8+0o/1sZb+nhA
           =mbN4
           -----END PGP MESSAGE-----
+    openclaw:
+      claude_bridge:
+        dashboard_pass: |
+          -----BEGIN PGP MESSAGE-----
+          Comment: GPGTools - http://gpgtools.org
+
+          hQIMA0QvKRCOLt9nARAAyI9oncUFEmdF9qaQ7OXZBwLyeBVqHiuROwAgpV08cm2u
+          Jfachhw9/eSX4g/mwFbdu6/ln/bhfDKBvmZgAXgJQk9QJCQ7tD6YqTSkBjdnRo+8
+          ohUsRpvJ2DPGXc9+S4JHQFDJSeQUXePujRdWmYC1xmO5LqmMKhMQtto8fTB4Ng46
+          ta6A7D91WGCxMMI6DROC0xqlzmXiSLPweCbtVp1HGJnK7neVc1+xW3SXIQztyimR
+          tf4cdVb0gjrWA0x3jfuKkxg1++jxYcyBGOUSwsV/Gyh/iKuXxXo2I3nVG6z3KNvj
+          VwHdktlKW6f5aW/epXo9Holk3ZdBLVqZ/TJFMpZhVPfq/TcsgRnBtW6W98LRbk4X
+          k1okA0/NJ7S7gsx928rhxoGqPDaiSFgR4nbC48KaonuguYP0TfZa+bYDchj4+3Z8
+          B0mm8SFJpTXPSKzlF+w5CD0U9PIOKEhg3EsQEAsGlfKqXQXQFpxxPDoMjOxJ76BW
+          qE9FYTTzWHIAZP/aMlpSwo2PqYv05l5zf/B74ztKGDacAALmjbp/KCj3B0NMr4Et
+          20x8lI/uNDVB8jH54nQputDcOOw+ldU0JSVh8/mCBc2Z7WBxxq2y3rIW61ZV9Xmy
+          Bg9vWD0qZsAog+pRpo4um12t/6qgD1KbSCuBV6qKTnJHVNad/blfF+Gejdy5xFzS
+          dgE/iiLQqI9A4HPa+Mblg5n6HTNUHRLmi9B2N7IgHTOLF0nqCTCnmpfQbX6Kq0OS
+          wzze+zTNMol72E4kb0E/JfmDGNWQy32JMKPR4hnfS5n1u9Dul4lGZ3L5Z31MrUcn
+          dLXNasD2DKqFxwv6kBTm5XR9kYREHRg=
+          =MuNT
+          -----END PGP MESSAGE-----
