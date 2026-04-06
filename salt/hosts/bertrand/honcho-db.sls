@@ -3,12 +3,15 @@
 honcho-db-user:
   postgres_user.present:
     - name: honcho
-    - password: "{{ salt['pillar.get']('secrets:vault:honcho:db_password') | trim }}"
-    - encrypted: False
     - login: True
-    - refresh_password: True
     - require:
       - service: postgresql-service
+
+honcho-db-user-password:
+  cmd.run:
+    - name: sudo -u postgres psql -c "ALTER ROLE honcho WITH PASSWORD '{{ salt['pillar.get']('secrets:vault:honcho:db_password') | trim }}';"
+    - require:
+      - postgres_user: honcho-db-user
 
 honcho-db:
   postgres_database.present:
