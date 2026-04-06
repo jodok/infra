@@ -20,6 +20,9 @@ Changes here affect live system configuration.
 - Use PR-based merges to `main`; do not push directly to protected branches.
 - Push the feature branch to GitHub as soon as it contains reviewable work so the user can review progress while you continue.
 - After pushing a review branch, always show the user the clickable PR URL in your reply.
+- When the user says `LGTM`, merge the PR without asking again.
+- After merging, always inspect both GitHub checks and GitHub Actions runs for the merged commit.
+- If a post-merge Action fails, continue until the failure is understood and, when needed, debug operationally on the target host (including via `ssh`) instead of stopping at the GitHub log.
 - Deploy from the host checkout (`/srv/infra`) as `deploy` with non-interactive sudo:
   - `ssh deploy@bertrand.batlogg.com 'cd /srv/infra && git pull && sudo -n /usr/bin/salt-call --local state.apply terse=true'`
 - After deployment, report the Salt summary (`Succeeded`/`Failed`) and key changed states.
