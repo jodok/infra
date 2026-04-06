@@ -1,0 +1,29 @@
+name: honcho
+
+services:
+  api:
+    container_name: honcho-api
+    image: ghcr.io/plastic-labs/honcho:${HONCHO_VERSION:-latest}
+    restart: always
+    ports:
+      - "127.0.0.1:${HONCHO_PORT:-8000}:8000"
+    env_file: ./.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/openapi.json')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  deriver:
+    container_name: honcho-deriver
+    image: ghcr.io/plastic-labs/honcho:${HONCHO_VERSION:-latest}
+    restart: always
+    env_file: ./.env
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    command: ["python", "-m", "src.deriver"]
+    depends_on:
+      api:
+        condition: service_healthy
