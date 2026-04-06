@@ -23,6 +23,7 @@ Changes here affect live system configuration.
 - When the user says `LGTM`, merge the PR without asking again.
 - After merging, always inspect both GitHub checks and GitHub Actions runs for the merged commit.
 - If a post-merge Action fails, continue until the failure is understood and, when needed, debug operationally on the target host (including via `ssh`) instead of stopping at the GitHub log.
+- When a failure is understood and there is a clear, local code fix, make the fix immediately, commit it, push it, and open the follow-up PR without waiting for the user to ask again.
 - Deploy from the host checkout (`/srv/infra`) as `deploy` with non-interactive sudo:
   - `ssh deploy@bertrand.batlogg.com 'cd /srv/infra && git pull && sudo -n /usr/bin/salt-call --local state.apply terse=true'`
 - After deployment, report the Salt summary (`Succeeded`/`Failed`) and key changed states.
