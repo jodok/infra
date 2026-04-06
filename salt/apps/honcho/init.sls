@@ -62,4 +62,4 @@ honcho-service-restart:
       - cmd: honcho-systemd-daemon-reload
       - cmd: postgres-restart
       - cmd: redis-restart
-      - cmd: honcho-db-pgvector
+      - postgres_extension: honcho-db-pgvector
