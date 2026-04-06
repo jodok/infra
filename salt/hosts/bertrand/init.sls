@@ -4,6 +4,7 @@ include:
   - hosts.bertrand.deploy
   - hosts.bertrand.volumes
   - docker
+  - letsencrypt
   - tailscale
   - nodejs
   - openclaw
@@ -33,6 +34,12 @@ include:
   file.managed:
   - source: salt://hosts/bertrand/namche.ai.conf
 
+/etc/nginx/conf.d/khumbu.namche.ai.conf:
+  file.managed:
+  - source: salt://hosts/bertrand/khumbu.namche.ai.conf
+  - require:
+    - cmd: /etc/letsencrypt/live/khumbu.namche.ai/fullchain.pem
+
 nginx-reload:
   cmd.run:
   - name: systemctl try-restart nginx.service
@@ -40,3 +47,4 @@ nginx-reload:
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.crt
     - file: /etc/nginx/certs/namche.ai.cloudflare-origin.key
     - file: /etc/nginx/conf.d/namche.ai.conf  
+    - file: /etc/nginx/conf.d/khumbu.namche.ai.conf
