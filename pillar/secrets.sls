@@ -2,9 +2,11 @@
 # format to the ``vault`` section of the file.
 # This is along https://docs.saltstack.com/en/latest/topics/pillar/index.html#pillar-encryption
 
-# to encrypt the text ``bar`` use this commandline (of course you have to replace
-# the e-mail adress as well):
-# echo -n bar | gpg --armor --trust-model always --encrypt -r user@domain.tld | sed ':a;N;$!ba;s/\n/\\n/g'
+# To encrypt the text ``bar`` use this command line (of course you have to
+# replace the e-mail address as well):
+# echo -n bar | gpg --armor --trust-model always --encrypt -r user@domain.tld
+# Then paste the armored output below as a YAML block scalar (`|`).
+# If your GPG frontend adds a `Comment:` header, omit that line when pasting.
 
 secrets:
   vault:
@@ -112,4 +114,25 @@ secrets:
           28MUwVIvMS2o6plWQILpBBZ3N3PCPU6ah+xoMQzAZHuAa/wRSQvmjr8ORs6wDKhp
           DbgFUPvaM0lN
           =9Njs
-          -----END PGP MESSAGE-----        
+          -----END PGP MESSAGE-----
+    cloudflare:
+      dns_api_tokens:
+        namche.ai: |
+          -----BEGIN PGP MESSAGE-----
+
+          hQIMA5ZHxiCsLfFyARAAmMnu6e41GQj7fmAnmolaeEKMkXwDcKQInolsLv8Ode/T
+          xieg8g/MjBjQcl35+eQJqYEWPlQfd3+0ydaB6SYMxj/A9LOgGP1LyTYrtL2zSz/z
+          CjAbeMkhxjGt8t4wrMTSRO2PoIuIAWAwCGnlVSSMGysKkJwB0Q4iFmD7Xbptw4b+
+          sp5XYZRLrfgaZG4YOYUeNg6XH/ozVEax0amwDZPyzJUdxmCViJ69wrrE/mhST+2A
+          4z9h4MHk1Mo4mkKkpI1YHszikUgwO/9O6VfRts+LEpBaLohJ+sdLv24oRwvzpSsP
+          rPwE0Zx5oXdzkntFSLEJcKWXt+k8EG/y2XISlJrklf9WTk9YKDDbaFZ0uorWHioc
+          eZEAEzJ9tF4DIU+9eFWuFik4WTvM0axWyOiJg0IhfwXljZQkhc3P6ZmUiB6jfA+k
+          wIzSNq7QmuJO13I+T+ZinEbf8BGoya2LFvwJY9yjjjsFXjqjYEq8Z9WWF473PML4
+          5Dqnf2QduA9Agm/pdnnuZcKaJ+/Mi1X0PqnfbiP5C44rYQjFpeBX57lcuqGhlpHb
+          eKQD24W0cBda5s2/nsYb4zbMHyMae3t2XiNllIft7Ghoi7TP5+gcsTbYk7p27nBO
+          B7WqgD4TtQ4ZOBl/nZ6DEh1Bz/MAaNNXBCXMO//AIoozuZfCVKL4yzyuASQeSCbU
+          egEJAhDM0izrW7DAjtgciJm8aXPTJ4zTJWpFPJsSD+Xj453jbF1RELv6RIHO37yR
+          xthiVdCLoGYdNPCf+HOnnG18xtkNk3r2OKngjPS6uPQJNv4+lxt0CWAUTfNYcRRq
+          0iubaat9dbgVj2xLS/LAjAk8+0o/1sZb+nhA
+          =mbN4
+          -----END PGP MESSAGE-----
