@@ -27,6 +27,15 @@
     - require:
       - file: /home/deploy/apps/honcho
 
+/home/deploy/apps/honcho/create-token.py:
+  file.managed:
+    - source: salt://apps/honcho/create-token.py
+    - user: deploy
+    - group: deploy
+    - mode: "0755"
+    - require:
+      - file: /home/deploy/apps/honcho
+
 /etc/systemd/system/honcho.service:
   file.managed:
     - source: salt://apps/honcho/honcho.service
