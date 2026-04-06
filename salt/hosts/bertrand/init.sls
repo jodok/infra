@@ -1,10 +1,16 @@
 include:
   - apps.api-proxy
+  - apps.honcho
   - apps.searxng
   - hosts.bertrand.deploy
+  - hosts.bertrand.honcho-db
+  - hosts.bertrand.postgres-docker
+  - hosts.bertrand.redis-docker
   - hosts.bertrand.volumes
   - docker
   - letsencrypt
+  - postgres
+  - redis
   - tailscale
   - nodejs
   - openclaw
@@ -46,6 +52,12 @@ include:
   - require:
     - cmd: /etc/letsencrypt/live/khumbu.namche.ai/fullchain.pem
 
+/etc/nginx/conf.d/honcho.khumbu.namche.ai.conf:
+  file.managed:
+  - source: salt://hosts/bertrand/honcho.khumbu.namche.ai.conf
+  - require:
+    - cmd: /etc/letsencrypt/live/khumbu.namche.ai/fullchain.pem
+
 nginx-reload:
   cmd.run:
   - name: systemctl try-restart nginx.service
@@ -55,3 +67,4 @@ nginx-reload:
     - file: /etc/nginx/conf.d/namche.ai.conf  
     - file: /etc/nginx/conf.d/khumbu.namche.ai.conf
     - file: /etc/nginx/conf.d/claude-bridge.khumbu.namche.ai.conf
+    - file: /etc/nginx/conf.d/honcho.khumbu.namche.ai.conf
