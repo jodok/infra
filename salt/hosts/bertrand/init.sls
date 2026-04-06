@@ -4,8 +4,6 @@ include:
   - apps.searxng
   - hosts.bertrand.deploy
   - hosts.bertrand.honcho-db
-  - hosts.bertrand.postgres-docker
-  - hosts.bertrand.redis-docker
   - hosts.bertrand.volumes
   - docker
   - letsencrypt
