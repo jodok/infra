@@ -16,9 +16,9 @@ honcho-db:
       - postgres_user: honcho-db-user
 
 honcho-db-pgvector:
-  cmd.run:
-    - name: sudo -u postgres psql -d honcho -c "CREATE EXTENSION IF NOT EXISTS vector;"
+  postgres_extension.present:
+    - name: vector
+    - maintenance_db: honcho
     - require:
       - postgres_database: honcho-db
       - pkg: postgresql-pgvector
-    - unless: sudo -u postgres psql -d honcho -tAc "SELECT 1 FROM pg_extension WHERE extname='vector'" | grep -q 1
