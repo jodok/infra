@@ -1,9 +1,11 @@
 include:
   - apps.api-proxy
   - apps.honcho
+  - apps.paperclip
   - apps.searxng
   - hosts.bertrand.deploy
   - hosts.bertrand.honcho-db
+  - hosts.bertrand.paperclip-db
   - hosts.bertrand.volumes
   - docker
   - letsencrypt
