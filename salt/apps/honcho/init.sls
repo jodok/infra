@@ -60,3 +60,5 @@ honcho-service-restart:
       - pkg: docker
       - service: honcho-service-enabled
       - cmd: honcho-systemd-daemon-reload
+      - cmd: postgres-restart
+      - cmd: redis-restart
