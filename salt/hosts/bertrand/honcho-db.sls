@@ -4,7 +4,6 @@ honcho-db-user:
   postgres_user.present:
     - name: honcho
     - password: "{{ salt['pillar.get']('secrets:vault:honcho:db_password') | trim }}"
-    - encrypted: False
     - login: True
     - refresh_password: True
     - require:
