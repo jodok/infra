@@ -158,3 +158,128 @@ secrets:
           Oa87InXZzP+mzN7p2OYwwPaqYsyIYnoaVNpro03cuDqv
           =PzIB
           -----END PGP MESSAGE-----
+    hono:
+      openai_api_key: |
+        -----BEGIN PGP MESSAGE-----
+        Comment: GPGTools - http://gpgtools.org
+
+        hQIMA5ZHxiCsLfFyAQ//cPDXmHCqQDzxS4yRLBdAQun5+0O46GaxLOX0rxyjuVKY
+        TRlq7J9+b7PEaRG6pf2dybYWbKmeKFknByJdgnmM9DRvjjaAcymfdHGpPkBxkM3S
+        s9BaFv4LYEFzk7LOgV4pQK04bdBXuwBeYJJ3iuFPw8C8KbiLq6I+AmXQ1rvMXcQc
+        bs+AGf1aIxJ0JdkvkYnmHSvOOeavXtAtaE2oaOqj5UXFbRhgoYVx6S3WraEi7GBk
+        Jwd9mwKSvSAcXuJjnPruUZTqGHlhXLcA4uFyH5NAJjvSywQqhpYs0umBFcVPdgJ3
+        wMBvBrJ89mwkGXRYUFd2LmWVYFRlDpP/yy6E56oUhBvolx+nijid7qMwUAgCXP2N
+        UeWIXzB9MQYOtIzVzbt3oetScT8Hrly/kiQvwa8CRergDpl5X9nA3pTDQ7bhkr+U
+        wG3QjAtfla/AdDoaxL50sRkYO0YdAy3jfgg/UQ3oDGId1YWFLncz8Biuy7SMCwYA
+        jFIEh6NH/0XF5HU4lkqahSkNCgCo0PeHOsOBR1qyYK21ANGCqxo7Z5X2ZVfXZgVh
+        BtGP6h6fm9NApRV7mCuR8Iwan+GDh/SNmHkeyaHoRXJNdsoGd93iJYBuHz+YyuPa
+        1Pz0/12LViBwe1+3A/pBbUwL9JtNnHesVB753oODXaKsdAaBMAkUIUzp0y9g78fU
+        wB8BCQIQYC0habOQhdM8M9BHzbALZs2Y5qUWt4bX0z8zdo9sIR0ZwyJQN8Uofba7
+        kzmMAyq27hsLi8xgStJxFfvr4I76OY8vBXCWx9HHY4QTNe8e2MJGBCpF9M7YLrJQ
+        HZ5KPwBxQJzVNEE3tYtLEoqaw/kQD/tHEoq++Fy3kxMVSI1ZkQutaUBfa5qFC1xD
+        qsqTMYzS9XFwpt+IxRL6U6le6GmM5d9TvwsmE9qWKHmFY43ihadaJLHJVWQQfwFq
+        9OSNlXoDfcd9YcVlxER+uYhIvs3XxUtG10uLZ/egInwi
+        =nYpr
+        -----END PGP MESSAGE-----
+      anthropic_api_key: |
+        -----BEGIN PGP MESSAGE-----
+        Comment: GPGTools - http://gpgtools.org
+
+        hQIMA5ZHxiCsLfFyAQ//cbeKy8Waa1uJ8Ogcl/u8a1FgazdeQlzCQeqTBCfe3t0O
+        xluc+cnkaJLkbhXmkccJA6EEiulto8dHfME3xRk5k+Jr2L/JFffEpwydkYkkuQur
+        DX6pCTCsM9uYiShOFaGLxANfixfIVLcNLM1yq1oOeQtT449lAdWBothIBri5eda3
+        dCiM3Baewj1GsPmbLQMpbCNvd8udnz+8H8Ys5kRlexDFuc0P55GsSqYOEnyBdM6b
+        HcYGw4/6tKwPuBDZOoD/0DuvcU32LTjA04+mTOKJPkD5jMy9GKppWDTDPh6OtUNh
+        ebCwdcV65zZF1Rt127wr4ZrpxQ9vM1UMA1EuzsrWzPTlGgquCDkzjfeVDqZcOAvU
+        OzRueM4un8YVoqhvDAP25AsvDuTunywmDom4UBaTJV+75mfy3eY42MCTBnxmZwlS
+        F5zZNvL76o6uFWVhViyjRAcgMLd6Ih+cg08dZeEs+ROGzj77ic2UGC7oEYZV6s1U
+        8MjjX1ak8kZe93XMj+4txCuvjbuvJwKrPt7hqhluYz6p18go0nf4qISrhBvHLxKq
+        2nlJpkedOyJlpXF1e+uo8GWDoroDQuq2p2iKu3iCB1Mb6Btm3pgCVd0pzhI2eSia
+        CdrDbWvCU4kf5XHIk6bDx6Auls71+HwQBtWXkFPMH5ZETJvVnYZZNOE4inScoxzU
+        sQEJAhAAWMnHz1pgU4ETzTsFTmNYU4stpaUR5UEXtuWMkOFUmGZEJYu9wV3btqrc
+        kegMtobrSJjdxLjhfgEq08VpjDa9cL9Gei+iyIRL4pVTa/qVfcZOsh+ygHRyw+oD
+        upGolMz5wY6YOV/3BDJlTNTCTc8JlWcB+ZMBbErtmjp1pXV6wI7MJC12MiE2aPV4
+        7MQMEHYS4LZ3inscQXnf6pWp3ei62cirVzi97b1vvUThpQ==
+        =fd0y
+        -----END PGP MESSAGE-----
+      gemini_api_key: |
+        -----BEGIN PGP MESSAGE-----
+        Comment: GPGTools - http://gpgtools.org
+
+        hQIMA5ZHxiCsLfFyAQ/8DxaQjY7t65C0iv3Z+XKINNSLv9f7pDGENZi88XSWKHTK
+        TX5XHk52UZAhkGB1I+qVtb6om7XN2JoSNYHZuZi4/iOfBQZcLHJ3Lv9++x4zW4xA
+        t/FfgRz62NWCkALw4ds8EJ0DeEJbKCPdWMx+2EaNYICOhhqbggSppe5hjeOgHugC
+        /MAuG82JM9e9df6l3IocxxRUIzqxBHvuDRE5GzzouPwbw5lZ6uOW5cBsAORp/G/B
+        dw60OakvJVi9iDmlIpCQW9BlknGNuYaZaNNiutK1gqDjiuSNTOkWLj8taC5dNIhq
+        6U0DVXxClOxI3E21KBx4GoHOMlCrWHIFtu2zXbkL8MuRrrDQqd2lWz0Z/KoRlj+U
+        Zaklj53cIVFB/e83pR0LF6HZvAyW/BEfInpEiY2IV2V591fY25R3OS3/1SUgK8F2
+        firLC5X3CCdKESUo3OzI3DGCUmwIVBjP2aA5dq9TBI5QQ0Os5WnPfeuwasI7bsFq
+        IjFgQpEkNc17A/7ivH9qYp/JT0KN7Vp1EZNalRCvSPHvC9xfJlUEv+sCRLbKg+5y
+        Q28GY5EjKzs1bEX9xY9dQy5HhWTIWhylMBM/xFpU9FDwzjE/PqyR8xD2i49msQLE
+        U9jkzFwSbGuv4+nnynBq7fosY+w8j91Ks37MeTldRpkvQO8NaGhMEqEmJeyAjkzU
+        bAEJAhC2DSQZMu/WDeemof1TDnjI1tVk6cSc1Rd7n8OjYatVAcsI01bbFh7iG9vR
+        6gLxHZtSaJFLMvB1oWxg4Es9kZ9WMVaio/q5K15chBspk++MXdlwe5S0p+rJMWLe
+        A3kpvtBJT7tcCXoMwg==
+        =PIun
+        -----END PGP MESSAGE-----
+      groq_api_key: |
+        -----BEGIN PGP MESSAGE-----
+        Comment: GPGTools - http://gpgtools.org
+
+        hQIMA5ZHxiCsLfFyARAAmGJXOHC58aUG2kdwUZrcDGvF3qcN4Rqcsesbtxb9wgeC
+        R6Y1TuuTHr5xu3yOea8cBC0Ij8KHz/rtT6Qjfaz0k/FHQzLnWuF4vMMcpKVjA+Gj
+        O+DUMMMlTay2mrEk0pSRSpaaFeJTOgfKx+xywgcX1YFsqmHe5OpNpsJB1WmDegEe
+        rdaCkqDjj+6TUu2Ik7xCH1lbDpyy5UQnKilIMYHb1yc7UGDvDPTKKjzIjFQmaRWh
+        GcD0JBrc/JKi8Nx4F7Jk4sJxzcYqu+USA8oYYMgz+geb/248siJb5+7qsEuwzrTh
+        9fWM7EsgSc5udR5v5gtxWs/p7bDZ50FEZ6lsurDHWdNVbZayL0QHyJLIIUE3QRq7
+        C6nPMa+tpEzocVl2CqcSup+8hQZj0B213cvmfqE9vhNTUf3H6SS3blzy+CF+hS3W
+        p7QZ06iTb6pI5qhzSo6rjyENqaaJ5zXAIKkyFsmfVnV+Bw2YK1LEMAFQXN+XDkid
+        o83E2KU/UkcFsTTdXArMk45m1xqENwHeFAGka3PsVuAYXi3UbrU6YsVGFUla/XUn
+        ToTlaShIxH7trm+Mdm1FfcZvupQeswCSBz3Laso66O4KQ0vC++7jbi5cUhwP20v1
+        0r+zDE3rN2gvs+miXkOu2ow03m7Tv7HD1kSiY6JT3lohKQc1ptC0WHjDIIWpsXXU
+        fQEJAhCk5AONsdf4tt8tMRDFvCCF+Q/PXiEqtctahC3ySRwNIaWEjnWt4LIV3CwJ
+        2KHSK3pETSduAo0s9pbqUAf5WzfWwHAYajG0cqCeOIeOJjJ5TEuCuCJgs2WU1f5T
+        9B0Qt/9zJ/bKUr/AM3s9+oZQnlzcZAOkkCoisgZg
+        =Ftba
+        -----END PGP MESSAGE-----
+    honcho:
+      db_password: |
+        -----BEGIN PGP MESSAGE-----
+        Comment: GPGTools - http://gpgtools.org
+
+        hQIMA5ZHxiCsLfFyAQ/9HrVmKiu7lANsDbg5hOKYiFnQlgCU/23tpVnvK4M7GCeY
+        3OfiBRqu3P/GQ9JB8GMv8WEOhJICWnQGa8+Jzc3DllWmpsbLGhwY0NJ9BtHG2tid
+        oYxab7w5+UI2JJ1JKtY8vkPVOLv20VUfq6TDBuvjDYtY5UTD+2h0vqHKxQaI3f7c
+        Iw41S23FqVgg/xfeBxZXxv6UfvorSRpJuMDhiWdV9CQHaINF5Y10iUuCmiWExA7T
+        1yto6MFdtI2nWqNvvvO8EYrMcAfkzv7JTrEHKDzcmAt746Vn+eKgGqwGvBBRAZ8w
+        XeUVhE+kbXqNFLyAP6b2vWvVpAXdvvpowxrIwOfxu050i71ZnCnB34yPl/ji0wmC
+        LrKLxfxcz+/6xTcIjlDjBPowa+SFhBkZSRag2UPJcwPFt0Snp7/eqae7bmP+Gdvu
+        3jvH67j6M1QMSWOGksuRnLzLTPEo/DvwjVuqdwQpaEsVPcDeRC7M/9FnCtjDV8pw
+        9fIvwILh2QUXl2q3ZVMpoJNutj47/aUbNO7GRAhRQsY++xx8ArLUd7lghjUsdjSg
+        wVl/gLRsNt2xcLLAzsAJVNnzmEoNHiaQozV2h4JTKM+OFCrA3DNj3goAAtDVnMlq
+        S/CN8aw5OQ1P7PwWK+spJ8tTSNlFfRewzV67i8/AT6iSfjg/B5xa05b8iXWqW7rU
+        ZQEJAhCcXDBNBcor2Ol588yvFpCxU6JpIKybqdkoi8wVw0u/ADbVDLxRkcnxHcNJ
+        RH6uX8wMmAU7fC988QRdfH9/sQKcmhsfDexW2neva/B5xE8UX2JRmSk5x/HEGpmg
+        RUTSba3A
+        =jYiQ
+        -----END PGP MESSAGE-----
+      jwt_secret: |
+        -----BEGIN PGP MESSAGE-----
+        Comment: GPGTools - http://gpgtools.org
+
+        hQIMA5ZHxiCsLfFyAQ//TLczY9nVwPGUVVTkL8sJLNklZJlUyyB79cnnU7fT5sSd
+        raIZAbk1LaHZl7ZdzuazP9WrJjrZniOwVB56jJ8cuGNuvX8SzcXUOYJv+yN2GdFf
+        DxtJFVQzMQbvLy+X6nzcigDv7pMQk9CjsxAU3o/0Qnmo7F2JyZE/R3sdAYXEbdvq
+        exzDrzHHCq3CoALpGoTagMDkBnZmtuksBC5J7TwUHj3w83azHJCIPoRcL7c0MreB
+        DKIPJrzbgLmBdVwemteH5cIdDlYm8mjO9PcmKHRW5VeOqAf/Sa0Cy/xMa/cBFA5x
+        5B1lCsbbi+ahAOmwxIXNu1gUiDi9GlJ42knbLlVxmarbPU+98HglLzQmXxo50dQk
+        RAv2B9CH7AEyP2saxvzLlBZaBr2iU0hcl+CREeWR6aqUSzBZXCAJcCO87YuWTDp2
+        J2b8pVRgBYCbrDrfa2CkLa9quYupldS71XYXjmVHT4TSlXmqWbGLWK8BHAfRJF99
+        fCnB8obEirfRE0kterCguu0jkaAgxZOGzfkF3lqE9udYwT1wVn5y4ohvOjOoGfks
+        Z/bpcRF91Lw2jfP5wqwpijYFYXyzYg3Hp3wQJ0NmJkLp13/SKA/dj/e96Hzk89DO
+        v49FUBg+dKmgL60XHMcR5GkgPa3WZcskObGmW7yr5XwOi9GsdIVsDc2cGBbVyG3U
+        hQEJAhDlrqPLV7dQSB+nXeOnHot7BuQxtL2hF3fWQhnZlcmWPSRDY6VLOnSYHs56
+        QJN9mzy0vKqtRBBcVVFjPSkyLTljnu3ah2xxoHhzVN6m8yQBJvSgr700eTw/6OuP
+        PCbT1lFJWb3vGFtfcUxqEwW7X8dBx5ENOz0OKx4pwBHsS/NJvE4=
+        =mkmS
+        -----END PGP MESSAGE-----
