@@ -63,4 +63,3 @@ honcho-service-restart:
       - cmd: postgres-restart
       - cmd: redis-restart
       - postgres_extension: honcho-db-pgvector
-      - cmd: honcho-db-password

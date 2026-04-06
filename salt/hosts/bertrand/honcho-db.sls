@@ -3,19 +3,12 @@
 honcho-db-user:
   postgres_user.present:
     - name: honcho
+    - password: "{{ salt['pillar.get']('secrets:vault:honcho:db_password') | trim }}"
+    - encrypted: scram-sha-256
     - login: True
+    - refresh_password: True
     - require:
       - service: postgresql-service
-
-# Set password via ALTER ROLE so PostgreSQL hashes it with scram-sha-256.
-# Salt's postgres_user.present pre-hashes as md5, which is incompatible
-# with scram-sha-256 auth in pg_hba.conf.
-honcho-db-password:
-  cmd.run:
-    - name: sudo -u postgres psql -c "ALTER ROLE honcho WITH PASSWORD '{{ salt['pillar.get']('secrets:vault:honcho:db_password') | trim }}';"
-    - unless: PGPASSWORD='{{ salt['pillar.get']('secrets:vault:honcho:db_password') | trim }}' psql -h localhost -U honcho -d postgres -tAc 'SELECT 1' 2>/dev/null | grep -q 1
-    - require:
-      - postgres_user: honcho-db-user
 
 honcho-db:
   postgres_database.present:
