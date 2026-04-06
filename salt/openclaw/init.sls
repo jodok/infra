@@ -8,13 +8,10 @@
       - user: deploy
 
 openclaw-claude-bridge-repo:
-  git.latest:
-    - name: {{ salt['pillar.get']('openclaw:claude_bridge:repo') }}
-    - target: /home/deploy/apps/openclaw-claude-bridge
-    - rev: {{ salt['pillar.get']('openclaw:claude_bridge:rev') }}
-    - user: deploy
-    - force_fetch: True
-    - force_checkout: True
+  cmd.run:
+    - name: git clone https://github.com/shinglokto/openclaw-claude-bridge.git /home/deploy/apps/openclaw-claude-bridge && git -C /home/deploy/apps/openclaw-claude-bridge checkout c828f45bfc7a8690487a1b06d0dec591b9857fcf
+    - runas: deploy
+    - creates: /home/deploy/apps/openclaw-claude-bridge/.git
     - require:
       - file: /home/deploy/apps/openclaw-claude-bridge
 
@@ -34,8 +31,7 @@ openclaw-claude-bridge-install:
     - name: npm ci
     - cwd: /home/deploy/apps/openclaw-claude-bridge
     - runas: deploy
-    - onchanges:
-      - git: openclaw-claude-bridge-repo
+    - creates: /home/deploy/apps/openclaw-claude-bridge/node_modules
     - env:
         HOME: /home/deploy
         PATH: /home/deploy/.local/bin:/usr/local/bin:/usr/bin:/bin
@@ -69,10 +65,8 @@ openclaw-claude-bridge-service-restart:
   cmd.run:
     - name: systemctl restart openclaw-claude-bridge.service
     - onchanges:
-      - git: openclaw-claude-bridge-repo
       - file: /home/deploy/apps/openclaw-claude-bridge/.env
       - file: /etc/systemd/system/openclaw-claude-bridge.service
-      - cmd: openclaw-claude-bridge-install
     - require:
       - service: openclaw-claude-bridge-service-enabled
       - cmd: openclaw-claude-bridge-systemd-daemon-reload
