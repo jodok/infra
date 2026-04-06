@@ -9,7 +9,7 @@ User=deploy
 Group=deploy
 WorkingDirectory=/home/deploy/apps/paperclip
 EnvironmentFile=/home/deploy/apps/paperclip/.env
-ExecStart=/usr/bin/pnpm --filter @paperclipai/server start
+ExecStart=/usr/bin/node --import ./server/node_modules/tsx/dist/loader.mjs server/dist/index.js
 Restart=always
 RestartSec=3
 
