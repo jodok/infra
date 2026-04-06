@@ -5,9 +5,10 @@ deploy:
   user.present:
     - shell: /bin/bash
     - home: /home/deploy
-    - optional_groups:
+    - groups:
       - infra
       - www-data
+    - remove_groups: False
     - createhome: True
     - require:
       - group: infra
