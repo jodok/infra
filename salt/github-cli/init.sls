@@ -1,26 +1,30 @@
 {%- if grains['os'] == 'Ubuntu' %}
-/etc/apt/keyrings:
+github-cli-apt-keyrings-dir:
   file.directory:
+    - name: /etc/apt/keyrings
     - user: root
     - group: root
     - mode: "0755"
 
-/etc/apt/keyrings/githubcli-archive-keyring.gpg:
+github-cli-archive-keyring:
   file.managed:
+    - name: /etc/apt/keyrings/githubcli-archive-keyring.gpg
     - source: https://cli.github.com/packages/githubcli-archive-keyring.gpg
     - require:
-      - file: /etc/apt/keyrings
+      - file: github-cli-apt-keyrings-dir
 
-/etc/apt/sources.list.d/github-cli.list:
+github-cli-apt-source:
   file.managed:
+    - name: /etc/apt/sources.list.d/github-cli.list
     - contents: |
         deb [signed-by=/etc/apt/keyrings/githubcli-archive-keyring.gpg] https://cli.github.com/packages stable main
     - require:
-      - file: /etc/apt/keyrings/githubcli-archive-keyring.gpg
+      - file: github-cli-archive-keyring
 
-gh:
+github-cli-package:
   pkg.installed:
+    - name: gh
     - refresh: True
     - require:
-      - file: /etc/apt/sources.list.d/github-cli.list
+      - file: github-cli-apt-source
 {%- endif %}
