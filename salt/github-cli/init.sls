@@ -10,6 +10,7 @@ github-cli-archive-keyring:
   file.managed:
     - name: /etc/apt/keyrings/githubcli-archive-keyring.gpg
     - source: https://cli.github.com/packages/githubcli-archive-keyring.gpg
+    - source_hash: sha256=6084d5d7bd8e288441e0e94fc6275570895da18e6751f70f057485dc2d1a811b
     - require:
       - file: github-cli-apt-keyrings-dir
 
