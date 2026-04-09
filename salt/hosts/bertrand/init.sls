@@ -3,6 +3,7 @@ include:
   - apps.honcho
   - apps.paperclip
   - apps.searxng
+  - github-cli
   - hosts.bertrand.deploy
   - hosts.bertrand.honcho-db
   - hosts.bertrand.paperclip-db
